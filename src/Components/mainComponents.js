@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { NetflixButton } from "./components";
+import TextField from '@material-ui/core/TextField' ;
+import './mainComponents.css' ;
 
 export const MainPage = () => {
   return (
@@ -8,7 +10,11 @@ export const MainPage = () => {
       <h1>Unlimited movies, TV shows, and more.</h1>
       <h2>Watch anywhere. Cancel anytime.</h2>
       <p>Ready to watch? Enter your email to create or restart your membership.</p>
-      <NetflixButton></NetflixButton>
+      <form className='main-page-form' onSubmit={(e) => e.preventDefault() } >
+        <input autoFocus required id='email' placeholder='Email Address' type='email' />
+        <NetflixButton>Get Started</NetflixButton>
+      </form>
+
     </MainPageContainer>
   );
 };
@@ -23,6 +29,22 @@ const MainPageContainer = styled.section`
   position: relative;
   color: white;
   text-align: center;
+  & > form {
+    display: flex ;
+    min-width: 50vw ;
+    margin: 0 auto ;
+  }
+  & > form > input {
+    background-color: white ;
+    flex: 100 ;
+    outline: none ;
+    border: none ;
+    height: 80px ;
+    padding: 20px ;
+    font-size: 1.2rem ;
+    font-weight: 700 ;
+    position: relative ;
+  }
   & > h1 {
     font-size: 3.7rem;
     font-weight: 500;

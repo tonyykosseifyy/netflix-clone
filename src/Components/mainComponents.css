@@ -1,0 +1,54 @@
+.app form .MuiFormControl-root {
+  background-color: white ;
+  flex: 100 ;
+  color: black ;
+  font-weight: 800 !important ;
+}
+
+.app form .MuiFormLabel-root {
+  font-weight: 800 ;
+  transform: translate(0 , -50%) scale(1) ;
+  top: 50% ;
+}
+.app form .MuiInput-underline:after {
+  border-bottom: 4px solid #EFA00A ;
+}
+.app form .MuiFormLabel-root.Mui-focused {
+  color: gray ;
+  transform: translate(0 , -24px ) scale(.7);
+}
+.app form .MuiInput-underline:after {
+  left: -10px ;
+}
+
+.app form .MuiInput-underline:before {
+  display: none  ;
+}
+
+.app form input:-internal-autofill-selected {
+  background-color: white !important ;
+}
+
+
+form.main-page-form > input::before {
+  content: 'Email Address' ;
+  top: 50% ;
+  left: 20px ;
+  transform: translate(0 , -50%) scale(1) ;
+  position: absolute;
+}
+form.main-page-form > input:focus::before {
+  transform: translate(0, -10px) scale(.7) ;
+}
+
+
+
+/*.app form .MuiInputLabel-formControl {
+top: 50% ;
+left: 20px ;
+transform: translateY(-50%) scale(1);
+}
+.app form .Mui-focused {
+  transform: translate(0 , -24px) scale(.8);
+}
+*/
