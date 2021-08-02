@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-
 export const NetflixLogo = () => {
   return (
     <svg viewBox="0 0 111 30">
@@ -17,9 +16,22 @@ export const NetflixLogo = () => {
   );
 };
 
+export const NetflixButton = ({ children, styles }) => {
+  return (
+    <Button
+      style={{
+        backgroundColor: "#E50914",
+        color: "white",
+        padding: styles?.padding || "6px 25px",
+        textTransform: "none",
+      }}
+    >
+      {children}
+    </Button>
+  );
+};
 
-
-export const NetflixButton = styled.button`
+/*export const NetflixButton = styled.button`
   cursor: pointer;
   background-color: #e50914;
   color: white;
@@ -30,3 +42,4 @@ export const NetflixButton = styled.button`
   border: none;
   border-radius: 6px;
 `;
+*/

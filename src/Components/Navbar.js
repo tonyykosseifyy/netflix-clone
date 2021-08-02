@@ -11,18 +11,6 @@ const Navbar = () => {
     <NavContainer className="navbar">
       <NetflixLogo />
       <NetflixButton>Sign Up</NetflixButton>
-      <Button
-        style={{
-          backgroundColor: "#E50914",
-          color: "white",
-          padding: "8px 20px",
-          textTransform: "none",
-          "&:hover": { backgroundColor: "black" },
-        }}
-        variant="contained"
-      >
-        Sign out{" "}
-      </Button>
     </NavContainer>
   );
 };
