@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+
 
 export const NetflixLogo = () => {
   return (
@@ -14,14 +17,16 @@ export const NetflixLogo = () => {
   );
 };
 
+
+
 export const NetflixButton = styled.button`
-  cursor: pointer ;
-  background-color: #E50914 ;
-  color: white ;
-  font-weight:${props => props.fw || '400'} ;
-  font-size: ${props => props.fs || '1.05rem' } ;
-  padding: ${props => props.pd || '10px 22px '} ;
-  outline: none ;
+  cursor: pointer;
+  background-color: #e50914;
+  color: white;
+  font-weight: ${(props) => props.fw || "500"};
+  font-size: ${(props) => props.fs || "1.05rem"};
+  padding: ${(props) => props.pd || "10px 22px "};
+  outline: none;
   border: none;
-  border-radius: 6px ;
+  border-radius: 6px;
 `;

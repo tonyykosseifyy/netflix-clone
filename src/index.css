@@ -4,3 +4,9 @@
   margin: 0 ;
   font-family: 'Roboto', sans-serif;
 }
+:root {
+  --netflix-red : #E50914 ;
+}
+.app .MuiButton-root {
+  font-family: 'Roboto', sans-serif !important ;
+}

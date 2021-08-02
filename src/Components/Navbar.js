@@ -1,7 +1,8 @@
 import React from "react";
 import "./Navbar.css";
 import styled from "styled-components";
-import { NetflixLogo , NetflixButton } from "./components.js";
+import { NetflixLogo, NetflixButton } from "./components.js";
+import Button from "@material-ui/core/Button";
 
 //ctrl-alt-f
 
@@ -10,6 +11,18 @@ const Navbar = () => {
     <NavContainer className="navbar">
       <NetflixLogo />
       <NetflixButton>Sign Up</NetflixButton>
+      <Button
+        style={{
+          backgroundColor: "#E50914",
+          color: "white",
+          padding: "8px 20px",
+          textTransform: "none",
+          "&:hover": { backgroundColor: "black" },
+        }}
+        variant="contained"
+      >
+        Sign out{" "}
+      </Button>
     </NavContainer>
   );
 };
@@ -17,16 +30,18 @@ const Navbar = () => {
 export default Navbar;
 
 const NavContainer = styled.nav`
-  background: red;
   min-height: 40px;
-  padding: 25px 4.5vw ;
+  padding: 25px 4.3vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   & > svg {
-    width: 140px;
-    height: 45px;
+    width: 10vw;
+    height: 50px;
     object-fit: contain;
-    fill: currentColor ;
+    fill: var(--netflix-red);
+    max-width: 180px;
+    min-width: 100px;
   }
 `;
