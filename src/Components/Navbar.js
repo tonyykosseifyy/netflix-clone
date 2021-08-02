@@ -18,7 +18,7 @@ const Navbar = () => {
 export default Navbar;
 
 const NavContainer = styled.nav`
-  min-height: 40px;
+  height: 120px ;
   padding: 25px 4.3vw;
   display: flex;
   justify-content: space-between;
