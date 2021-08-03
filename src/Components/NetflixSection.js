@@ -5,13 +5,22 @@ import { NetflixContainer } from "./components";
 
 
 const marginFunction = (index) => {
-    if (index % 2 === 0 ) {
-      return {marginRight: '30px'}
+    if (window.innerWidth < 1100 ) {
+      return
+    }
+      if (index % 2 === 0 ) {
+      return {paddingRight: '2em'}
     } else {
-      return { marginLeft: '30px'}
+      return { paddingLeft: '2em'}
     }
 }
-
+const paddingFunction = (index) => {
+  if (window.innerWidth < 1100 || index % 2 === 0 ) {
+    return
+  } else {
+      return { transform : 'translateX(-25%)'}
+  }
+}
 const NetflixSection = () => {
   return (
     <div className="netflix-containers">
@@ -25,7 +34,7 @@ const NetflixSection = () => {
             <h1>{item.title}</h1>
             <h2>{item.description}</h2>
           </div>
-          <div className="netflix-container-animations">
+          <div className="netflix-container-animations" style={paddingFunction(index)}>
             <img src={item.image} alt={item.title} style={{zIndex: '2', position: 'relative'}} />
             { item.hasOwnProperty('srcs') ?
               <div className='netflix-srcs'>

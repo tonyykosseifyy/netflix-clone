@@ -37,7 +37,7 @@ export const NetflixContainer = ({ children, className, number }) => {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         flexDirection: number % 2 === 0 ? "row" : "row-reverse",
       }}
       className={className}

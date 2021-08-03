@@ -41,6 +41,9 @@ form.main-page-form > label.focused {
   border-top: 8px solid #222222;
   padding: 30px 4vw;
 }
+.neflix-container-data {
+  max-width: 600px;
+}
 .neflix-container-data > h1 {
   font-size: 3.1rem;
 }
@@ -48,7 +51,6 @@ form.main-page-form > label.focused {
 .neflix-container-data > h2 {
   font-size: 1.6rem;
   font-weight: 400;
-  max-width: 80%;
   margin-top: 20px;
 }
 
@@ -68,7 +70,7 @@ form.main-page-form > label.focused {
   width: 60%;
   height: 38%;
   left: 20%;
-  z-index: 1 ;
+  z-index: 1;
 }
 .netflix-animation > video {
   height: 100%;
@@ -79,8 +81,8 @@ form.main-page-form > label.focused {
 .netflix-srcs {
   position: absolute;
   bottom: 10%;
-  left: 100px;
-  right: 120px;
+  left: 20%;
+  right: 20%;
   border-radius: 10px;
   background-color: black;
   color: white;
@@ -88,10 +90,14 @@ form.main-page-form > label.focused {
   border: 1px solid white;
   display: flex;
   padding: 12px;
-  z-index: 100 ;
+  z-index: 100;
+  min-width: 150px;
 }
 .netflix-srcs > img {
   object-fit: contain;
+}
+.netflix-container-animations > img {
+  max-width: 600px;
 }
 .netflix-srcs-child {
   flex: 100;
@@ -122,8 +128,47 @@ form.main-page-form > label.focused {
 }
 
 
-@media screen and (max-width: 700px ) {
+
+@media screen and (max-width: 1100px) {
+  .netflix-srcs {
+    left: 10%;
+    right: 10%;
+    height: 60px;
+  }
+  .neflix-container-data {
+  text-align: center;
+  }
+  .netflix-container-animations > img {
+    max-width: 450px;
+  }
   .netflix-container {
     flex-direction: column !important ;
+  }
+  .netflix-container-animations {
+    margin-top: 30px;
+  }
+  .neflix-container-data > h1 {
+    font-size: 2rem;
+  }
+  .neflix-container-data > h2 {
+    font-size: 1.3rem;
+    max-width: 100%;
+  }
+
+  @media screen and (max-width: 500px) {
+  .netflix-container-animations > img {
+    max-width: 100%;
+   }
+    .neflix-container-data > h1 {
+      font-size: 1.3rem;
+    }
+    .neflix-container-data > h2 {
+      font-size: 1rem;
+    }
+    .netflix-srcs {
+      left: 8%;
+      right: 8%;
+      height: 60px;
+    }
   }
 }
