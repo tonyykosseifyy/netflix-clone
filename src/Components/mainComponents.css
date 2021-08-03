@@ -57,10 +57,18 @@ form.main-page-form > label.focused {
 }
 .netflix-animation {
   position: absolute;
-  top: 100px;
-  left: 90px;
-  height: 260px;
-  width: 460px;
+  top: 21%;
+  left: 13%;
+  height: 53%;
+  width: 73%;
+}
+.netflix-animation-2 {
+  top: 10%;
+  position: absolute;
+  width: 60%;
+  height: 38%;
+  left: 20%;
+  z-index: 1 ;
 }
 .netflix-animation > video {
   height: 100%;
@@ -79,24 +87,43 @@ form.main-page-form > label.focused {
   height: 90px;
   border: 1px solid white;
   display: flex;
-  padding: 12px ;
+  padding: 12px;
+  z-index: 100 ;
 }
 .netflix-srcs > img {
-  object-fit: contain ;
+  object-fit: contain;
 }
 .netflix-srcs-child {
-  flex :100 ;
-  display: flex ;
-  flex-direction: column ;
-  justify-content: center ;
-  padding-left: 15px ;
+  flex: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
 }
 .netflix-srcs-child > p:first-child {
-  font-weight: bold ;
+  font-weight: bold;
 }
 .netflix-srcs-child > p:last-child {
-  color: #0051C6 ;
+  color: #0051c6;
+  margin-top: 7px;
 }
 .netflix-srcs-child::after {
-  content: '' ;
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(0, -50%);
+  background: url("https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/download-icon.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 100%;
+}
+
+
+@media screen and (max-width: 700px ) {
+  .netflix-container {
+    flex-direction: column !important ;
+  }
 }
