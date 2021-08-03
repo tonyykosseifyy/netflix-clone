@@ -31,6 +31,22 @@ export const NetflixButton = ({ children, styles }) => {
   );
 };
 
+export const NetflixContainer = ({ children, className, number }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: number % 2 === 0 ? "row" : "row-reverse",
+      }}
+      className={className}
+    >
+      {children}
+    </div>
+  );
+};
+
 /*export const NetflixButton = styled.button`
   cursor: pointer;
   background-color: #e50914;

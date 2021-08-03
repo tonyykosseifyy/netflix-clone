@@ -1,73 +1,102 @@
-.app form .MuiFormControl-root {
-  background-color: white ;
-  flex: 100 ;
-  color: black ;
-  font-weight: 800 !important ;
-}
-
-.app form .MuiFormLabel-root {
-  font-weight: 800 ;
-  transform: translate(0 , -50%) scale(1) ;
-  top: 50% ;
-}
-.app form .MuiInput-underline:after {
-  border-bottom: 4px solid #EFA00A ;
-}
-.app form .MuiFormLabel-root.Mui-focused {
-  color: gray ;
-  transform: translate(0 , -24px ) scale(.7);
-}
-.app form .MuiInput-underline:after {
-  left: -10px ;
-}
-
-.app form .MuiInput-underline:before {
-  display: none  ;
-}
-
 .app form input:-internal-autofill-selected {
   background-color: white !important ;
 }
 
-
 form.main-page-form > span {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 1px;
   right: 1px;
   height: 4px;
-  background-color: #EFA00A;
-  transition: .2s cubic-bezier(0,-0.15, 0, 0.97) ;
+  background-color: #efa00a;
+  transition: 0.2s cubic-bezier(0, -0.15, 0, 0.97);
   transform: scaleX(0);
 }
 
 form.main-page-form > span.focused {
-  transform: scaleX(1) ;
+  transform: scaleX(1);
 }
 
 form.main-page-form > label {
   position: absolute;
-  color: #8C8C8C;
-  font-weight: 200 ;
-  top: 50% ;
-  left: 20px ;
-  transform: translate(0,-50%) scale(1) ;
-  z-index: 100 ;
-  transition: .2s ease-out ;
+  color: #8c8c8c;
+  font-weight: 200;
+  top: 50%;
+  left: 20px;
+  transform: translate(0, -50%) scale(1);
+  z-index: 100;
+  transition: 0.2s ease-out;
 }
-
 
 form.main-page-form > label.focused {
-  transform: translate( -24px , -32px) scale(.7) ;
+  transform: translate(-24px, -32px) scale(0.7);
   font-weight: 700;
 }
-/*.app form .MuiInputLabel-formControl {
-top: 50% ;
-left: 20px ;
-transform: translateY(-50%) scale(1);
+.netflix-containers {
+  background-color: black;
+  color: white;
 }
-.app form .Mui-focused {
-  transform: translate(0 , -24px) scale(.8);
+.netflix-container {
+  border-top: 8px solid #222222;
+  padding: 30px 4vw;
 }
-*/
+.neflix-container-data > h1 {
+  font-size: 3.1rem;
+}
+
+.neflix-container-data > h2 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  max-width: 80%;
+  margin-top: 20px;
+}
+
+.netflix-container-animations {
+  position: relative;
+}
+.netflix-animation {
+  position: absolute;
+  top: 100px;
+  left: 90px;
+  height: 260px;
+  width: 460px;
+}
+.netflix-animation > video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.netflix-srcs {
+  position: absolute;
+  bottom: 10%;
+  left: 100px;
+  right: 120px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  height: 90px;
+  border: 1px solid white;
+  display: flex;
+  padding: 12px ;
+}
+.netflix-srcs > img {
+  object-fit: contain ;
+}
+.netflix-srcs-child {
+  flex :100 ;
+  display: flex ;
+  flex-direction: column ;
+  justify-content: center ;
+  padding-left: 15px ;
+}
+.netflix-srcs-child > p:first-child {
+  font-weight: bold ;
+}
+.netflix-srcs-child > p:last-child {
+  color: #0051C6 ;
+}
+.netflix-srcs-child::after {
+  content: '' ;
+}
