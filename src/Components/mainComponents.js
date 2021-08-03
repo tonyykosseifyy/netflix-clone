@@ -52,6 +52,7 @@ export const MainPage = () => {
             <FormErrorMessage>Please enter a valid email address</FormErrorMessage>
           </div>
         </Fade>
+        <NetflixButton>Get Started</NetflixButton>
       </div>
     </MainPageContainer>
   );
@@ -76,6 +77,9 @@ const MainPageContainer = styled.section`
   position: relative;
   color: white;
   text-align: center;
+  & > div > button {
+    display: none ;
+  }
   & form {
     display: flex;
     min-width: 50vw;
@@ -92,6 +96,7 @@ const MainPageContainer = styled.section`
     font-size: 1.2rem;
     font-weight: 700;
     position: relative;
+    border-radius: 3px ;
   }
   & > h1 {
     font-size: 3.7rem;
@@ -100,14 +105,14 @@ const MainPageContainer = styled.section`
     line-height: 4rem;
   }
   & > h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 400;
     margin: 15px 0;
   }
   & > p {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
   @media screen and (max-width: 1200px) {
     & > h1 {
@@ -122,10 +127,32 @@ const MainPageContainer = styled.section`
       font-size: 1rem;
     }
   }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
+    & {
+      padding: 0 7px ;
+    }
+    & > div > button {
+      display: flex ;
+      margin: 0 auto ;
+    }
+    & form {
+      min-width: 70vw ;
+    }
+    & form > input {
+      height: 60px ;
+    }
+    & form > button {
+      display: none ;
+    }
     & > h1 {
       font-size: 1.8rem;
       line-height: 2.8rem;
+    }
+    & > p {
+      max-width: 90vw ;
+    }
+    & > h2 {
+      font-size: 1.1rem ;
     }
   }
 `;
