@@ -20,7 +20,7 @@ export const user = createSlice({
         signOut : (state) => {
             state.name ='' ;
             state.email = '';
-            state.photoURL = '' ;
+            state.photoURL = '';
             state.signedIn = false
         } ,
         updateUser : (state , action ) => {

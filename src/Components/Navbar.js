@@ -1,11 +1,11 @@
-import React  from "react";
+import React, { useEffect }  from "react";
 import "./Navbar.css";
 import styled from "styled-components";
 import { NetflixLogo, NetflixButton } from "./components.js";
 import Button from "@material-ui/core/Button";
 import { useSelector , useDispatch } from "react-redux";
 import { signUp , signOut , updateUser } from '../redux/userAuth.js' ;
-
+import { firebase } from '../firebaseAuth' ;
 
 //ctrl-alt-f
 
@@ -18,12 +18,35 @@ const Navbar = () => {
     email: 'tonykosseify123@gmail.com' ,
     photoURL : 'https://image.com' ,
   }
+  const firebaseSign = () => {
+    firebase.auth().createUserWithEmailAndPassword('tonykosseify123@gmail.com', '123tong321123')
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('firebase user' , user) ;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('firebase err', errorCode , errorMessage ) ;
+      });
+  }
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        var uid = user.uid;
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])
   return (
     <NavContainer className="navbar">
       <NetflixLogo />
       <NetflixButton onClick={() => dispatch(signUp(userTest))}>Sign Up</NetflixButton>
-      <NetflixButton onClick={() => dispatch(signOut())}>Sign Out</NetflixButton>
-      <NetflixButton onClick={() => dispatch(updateUser({name: 'email' , value: 'kosstony@gmail.com'}))}>Update</NetflixButton>
     </NavContainer>
   );
 };

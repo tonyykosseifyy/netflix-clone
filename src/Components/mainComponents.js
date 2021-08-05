@@ -9,6 +9,7 @@ export const MainPage = () => {
   const [focus, setFocus] = useState(false);
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
+  const [ gettingStarted , setGettingStarted ] = useState(false) ;
   useEffect(() => {
     if ( input.trim() ) {
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -19,6 +20,12 @@ export const MainPage = () => {
 
   }, [input]);
   console.log(error);
+  const submitToSign = (e) => {
+    e && e.preventDefault() 
+    if ( input.trim() && !error ) {
+      setGettingStarted(true) ; 
+    }
+  }
   return (
     <MainPageContainer>
       <h1>Unlimited movies, TV shows, and more.</h1>
@@ -27,7 +34,7 @@ export const MainPage = () => {
         Ready to watch? Enter your email to create or restart your membership.
       </p>
       <div>
-        <form className="main-page-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="main-page-form" onSubmit={(e) => submitToSign(e)}>
           <label
             className={focus || input.trim() ? "focused" : ""}
             htmlFor="email"
@@ -52,8 +59,9 @@ export const MainPage = () => {
             <FormErrorMessage>Please enter a valid email address</FormErrorMessage>
           </div>
         </Fade>
-        <NetflixButton>Get Started</NetflixButton>
+        <NetflixButton onClick={() => submitToSign()} >Get Started</NetflixButton>
       </div>
+
     </MainPageContainer>
   );
 };

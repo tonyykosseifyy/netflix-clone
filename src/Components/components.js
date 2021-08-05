@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 export const NetflixLogo = () => {
@@ -48,15 +47,10 @@ export const NetflixContainer = ({ children, className, number }) => {
   );
 };
 
-/*export const NetflixButton = styled.button`
-  cursor: pointer;
-  background-color: #e50914;
-  color: white;
-  font-weight: ${(props) => props.fw || "500"};
-  font-size: ${(props) => props.fs || "1.05rem"};
-  padding: ${(props) => props.pd || "10px 22px "};
-  outline: none;
-  border: none;
-  border-radius: 6px;
-`;
-*/
+export const NetflixSign = styled.div`
+  border-radius: 5px ;
+  padding: 30px ;
+  background: rgba(0,0,0,.6) ;
+  
+
+`
