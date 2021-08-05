@@ -15,10 +15,11 @@ export const NetflixLogo = () => {
   );
 };
 
-export const NetflixButton = ({ children, styles , onClick }) => {
+export const NetflixButton = ({ children, styles , onClick , className }) => {
   return (
     <Button
       onClick={onClick}
+      className={className}
       style={{
         backgroundColor: "#E50914",
         color: "white",
@@ -48,9 +49,53 @@ export const NetflixContainer = ({ children, className, number }) => {
 };
 
 export const NetflixSign = styled.div`
-  border-radius: 5px ;
-  padding: 30px ;
-  background: rgba(0,0,0,.6) ;
-  
-
+    border-radius: 5px;
+    padding: 30px 50px ;
+    background-color: rgba(0,0,0,.6);
+    width: 470px;
+    margin: 40px auto 0 auto;
+    color: white;
+    z-index: 100;
+    position: relative;
+    display: flex ;
+    flex-direction: column ;
+    & > form {
+      position: relative;
+      display: flex ;
+      flex-direction: column ;
+    }
+    & > h1 {
+      margin-bottom: 40px ;
+      font-size: 2rem ;
+    }
+    & > p {
+      font-weight: 400 ;
+      color: #737373 ;
+      margin-top: 20px ;
+    }
+    & > p > strong {
+      margin-left: 4px ;
+      color: white ;
+      font-weight :bold ;
+    }
+    & > p > strong:hover {
+      text-decoration: underline ;
+      cursor: pointer ;
+    }
+    & > form > div > span {
+      position: absolute ;
+      top: calc(50% - 12.5px) ;
+      right: 6px ;
+      text-transform: uppercase ;
+      color: #8C8067 ;
+      transform: translate(0 , -50% ) ;
+      cursor: pointer ;
+      padding: 7px 10px ;
+      transition: .3s ease-out ;
+      border-radius: 5px ;
+    }
+    & > form > div > span:hover {
+      background-color : #3A3A3A ;
+      box-shadow: 2px 2px 8px  #2E2A22 ;
+    }
 `

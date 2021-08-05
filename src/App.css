@@ -20,3 +20,36 @@
   );
   z-index: 0;
 }
+
+
+.main-page .MuiFormControl-root {
+  margin-bottom: 5px ;
+  min-width: 0 ;
+  width: 100% ;
+}
+.main-page .MuiInputBase-input {
+  background-color : #333333 ;
+}
+
+.main-page .MuiInputLabel-filled {
+  color: #8C8067 ;
+}
+
+.main-page .MuiFilledInput-underline:after {
+  border-bottom-color: #EFA00A ; 
+}
+
+.main-page .Mui-focused {
+  color: #8C8067 !important ;
+}
+
+.main-page .netflix-button-login {
+  margin-bottom: 15px ;
+  margin-top: 25px ;
+}
+
+.main-page .netflix-sign-inputs p {
+  color: #EFA00A ;
+  font-weight: 300 ;
+  font-size: 15px ;
+}
