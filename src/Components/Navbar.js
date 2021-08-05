@@ -1,8 +1,10 @@
-import React from "react";
+import React  from "react";
 import "./Navbar.css";
 import styled from "styled-components";
 import { NetflixLogo, NetflixButton } from "./components.js";
 import Button from "@material-ui/core/Button";
+
+
 
 //ctrl-alt-f
 
@@ -16,6 +18,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 const NavContainer = styled.nav`
   height: 120px ;
