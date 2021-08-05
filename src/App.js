@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar";
 import { MainPage } from './Components/mainComponents' ;
 import NetflixSection from './Components/NetflixSection' ;
 
+
 //100 , 300 , 400 , 500 , 700 ;
 
 const App = () => {

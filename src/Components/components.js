@@ -16,9 +16,10 @@ export const NetflixLogo = () => {
   );
 };
 
-export const NetflixButton = ({ children, styles }) => {
+export const NetflixButton = ({ children, styles , onClick }) => {
   return (
     <Button
+      onClick={onClick}
       style={{
         backgroundColor: "#E50914",
         color: "white",
