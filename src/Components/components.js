@@ -18,7 +18,6 @@ export const NetflixLogo = () => {
 export const NetflixButton = ( props ) => {
   return (
     <Button
-      {...props}
       onClick={props.onClick}
       className={props.className}
       style={{
@@ -26,6 +25,8 @@ export const NetflixButton = ( props ) => {
         color: "white",
         padding: props.styles?.padding || "6px 25px",
         textTransform: "none",
+        opacity: props.disabled ? '.7' : '1' ,
+        cursor: props.disabled ? 'not-allowed' : 'pointer'
       }}
     >
       {props.children}

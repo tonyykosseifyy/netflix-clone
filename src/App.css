@@ -49,10 +49,9 @@
 
 .main-page .netflix-button-login {
   margin-bottom: 15px ;
-  margin-top: 25px ;
+  margin-top: 15px ;
   transition: .3s ease-out ;
 }
-
 .main-page .netflix-sign-inputs p {
   color: #EFA00A ;
   font-weight: 300 ;
@@ -60,7 +59,7 @@
 }
 
 .main-page .netflix-button-login-hover:hover {
-  transform: scale(1.03) ;
+  transform: scale(1.015) ;
   box-shadow: 4px 4px 8px  black ;
 }
 .main-page .netflix-sign-inputs .MuiInputBase-input.MuiFilledInput-input {

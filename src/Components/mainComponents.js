@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NetflixButton } from "./components";
-import TextField from "@material-ui/core/TextField";
 import "./mainComponents.css";
 import Fade from "react-reveal/Fade";
+import { updateUser } from '../redux/userAuth' ;
+import { useDispatch } from 'react-redux' ;
+import { useHistory } from 'react-router-dom' ;
 
 export const MainPage = () => {
   const [focus, setFocus] = useState(false);
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const [ gettingStarted , setGettingStarted ] = useState(false) ;
+
+  const dispatch = useDispatch() ;
+  let history = useHistory() ;
   useEffect(() => {
     if ( input.trim() ) {
       const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -24,6 +29,8 @@ export const MainPage = () => {
     e && e.preventDefault() 
     if ( input.trim() && !error ) {
       setGettingStarted(true) ; 
+      dispatch(updateUser({name: 'email' , value: input })) ;
+      history.push('/login') ;
     }
   }
   return (
@@ -52,7 +59,7 @@ export const MainPage = () => {
             onChange={(e) => setInput(e.target.value)}
           />
           <span className={focus ? "focused" : ""}></span>
-          <NetflixButton className='neflix-button-main'>Get Started</NetflixButton>
+          <NetflixButton className='neflix-button-main' onClick={(e) => submitToSign(e)}>Get Started</NetflixButton>
         </form>
         <Fade when={error} left>
           <div>
