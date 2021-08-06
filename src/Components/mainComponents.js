@@ -52,14 +52,14 @@ export const MainPage = () => {
             onChange={(e) => setInput(e.target.value)}
           />
           <span className={focus ? "focused" : ""}></span>
-          <NetflixButton>Get Started</NetflixButton>
+          <NetflixButton className='neflix-button-main'>Get Started</NetflixButton>
         </form>
         <Fade when={error} left>
           <div>
             <FormErrorMessage>Please enter a valid email address</FormErrorMessage>
           </div>
         </Fade>
-        <NetflixButton onClick={() => submitToSign()} >Get Started</NetflixButton>
+        <NetflixButton className='neflix-button-main' onClick={() => submitToSign()} >Get Started</NetflixButton>
       </div>
 
     </MainPageContainer>
@@ -99,7 +99,7 @@ const MainPageContainer = styled.section`
     flex: 100;
     outline: none;
     border: none;
-    height: 80px;
+    //height: 80px;
     padding: 20px;
     font-size: 1.2rem;
     font-weight: 700;

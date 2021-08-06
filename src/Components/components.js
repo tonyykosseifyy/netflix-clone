@@ -15,22 +15,25 @@ export const NetflixLogo = () => {
   );
 };
 
-export const NetflixButton = ({ children, styles , onClick , className }) => {
+export const NetflixButton = ( props ) => {
   return (
     <Button
-      onClick={onClick}
-      className={className}
+      {...props}
+      onClick={props.onClick}
+      className={props.className}
       style={{
         backgroundColor: "#E50914",
         color: "white",
-        padding: styles?.padding || "6px 25px",
+        padding: props.styles?.padding || "6px 25px",
         textTransform: "none",
       }}
     >
-      {children}
+      {props.children}
     </Button>
   );
 };
+
+//disabled
 
 export const NetflixContainer = ({ children, className, number }) => {
   return (
