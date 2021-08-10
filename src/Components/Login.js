@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
 import Navbar from "./Navbar";
-import { useLocation, Link } from "react-router-dom";
 import { NetflixSign, NetflixButton } from "./components";
 import TextField from "@material-ui/core/TextField";
 import { useSelector } from "react-redux";
 import Fade from "react-reveal/Fade";
-import { createUser, signInUser } from "../firebaseLogin";
+import { createUser, signInUser, SignUpProvider } from "../firebaseLogin";
 
 const Login = () => {
   const emailAddress = useSelector((state) => state.user.email);
@@ -17,6 +15,7 @@ const Login = () => {
   const [pass, setPass] = useState("");
   const [emailErr, setEmailErr] = useState(false);
   const [data, setData] = useState({});
+  const [provider, setProvider] = useState(false);
 
   let passRef = useRef();
   useEffect(() => {
@@ -110,8 +109,10 @@ const Login = () => {
             Sign {newUser ? "In" : "Up"} Now
           </strong>
         </p>
-        <Link to="/">Go home</Link>
       </NetflixSign>
+      <NetflixButton onClick={() => SignUpProvider(setData, setProvider)}>
+        Sign in with Google
+      </NetflixButton>
     </div>
   );
 };

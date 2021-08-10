@@ -1,14 +1,17 @@
 import { firebase } from './firebaseAuth.js' ;
+//import { GoogleAuthProvider } from 'firebase/auth' ;
+
+var googleProvider = new firebase.auth.GoogleAuthProvider() ;
 
 
-
-export const SignUpProvider = (provider) => {
+export const SignUpProvider = (setData , setProvider) => {
     firebase.auth()
-        .signInWithRedirect(provider)
+        .signInWithRedirect(googleProvider)
         .then((result) => {
-            return result ;
+            setData(result)
         }).catch((error) => {
-            return error 
+            console.log(error) ;
+            alert(error.message) ;
         })  
 } ;
 
