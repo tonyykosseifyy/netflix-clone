@@ -1,35 +1,48 @@
-import React, { useEffect }  from "react";
+import React, { useEffect } from "react";
 import "./Navbar.css";
 import styled from "styled-components";
 import { NetflixLogo, NetflixButton } from "./components.js";
 import Button from "@material-ui/core/Button";
-import { useSelector , useDispatch } from "react-redux";
-import { signUp , signOut , updateUser } from '../redux/userAuth.js' ;
-import { firebase } from '../firebaseAuth' ;
+import { useSelector, useDispatch } from "react-redux";
+import { signUp, signOut, updateUser } from "../redux/userAuth.js";
+import { firebase } from "../firebaseAuth";
+import { useLocation } from "react-router-dom";
 
+{
+  /* let location = useLocation() ;
+    console.log(location) ; 
+*/
+}
 //ctrl-alt-f
 
 const Navbar = () => {
-  const user = useSelector(state => state.user) ;
-  console.log('user => ' , user )
-  const dispatch = useDispatch() ;
+  let location = useLocation();
+
+  const user = useSelector((state) => state.user);
+  console.log("user => ", user);
+  const dispatch = useDispatch();
   const userTest = {
-    name :'tony' ,
-    email: 'tonykosseify123@gmail.com' ,
-    photoURL : 'https://image.com' ,
-  }
+    name: "tony",
+    email: "tonykosseify123@gmail.com",
+    photoURL: "https://image.com"
+  };
   const firebaseSign = () => {
-    firebase.auth().createUserWithEmailAndPassword('tonykosseify123@gmail.com', '123tong321123')
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        "tonykosseify123@gmail.com",
+        "123tong321123"
+      )
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log('firebase user' , user) ;
+        console.log("firebase user", user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('firebase err', errorCode , errorMessage ) ;
+        console.log("firebase err", errorCode, errorMessage);
       });
-  }
+  };
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -42,20 +55,24 @@ const Navbar = () => {
         // ...
       }
     });
-  },[])
+  }, []);
   return (
     <NavContainer className="navbar">
       <NetflixLogo />
-      <NetflixButton onClick={() => dispatch(signUp(userTest))}>Sign Up</NetflixButton>
+      <NetflixButton
+        style={{ display: location?.pathname === "/login" ? "none" : "" }}
+        onClick={() => dispatch(signUp(userTest))}
+      >
+        Sign Up
+      </NetflixButton>
     </NavContainer>
   );
 };
 
 export default Navbar;
 
-
 const NavContainer = styled.nav`
-  height: 120px ;
+  height: 120px;
   padding: 25px 4.3vw;
   display: flex;
   justify-content: space-between;

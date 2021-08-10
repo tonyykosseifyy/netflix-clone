@@ -16,18 +16,22 @@ export const SignUpProvider = (provider) => {
 export const signInUser = ( email , password , setData, setNewUser) => {
     firebase.auth().signInWithEmailAndPassword(email , password ) 
     .then((response) => {
-        console.log(response)
+        console.log('Sign in response',response) ;
+        setData(response) ;
     }).catch((error) => {
-        console.log(error) 
+        alert(error.message + "\n Sign Up instead !") 
+        setNewUser(true)
     })
 }
 
 export const createUser = (email , password , setData , setNewUser ) => {
     firebase.auth().createUserWithEmailAndPassword(email , password)
     .then((response) => {
-        console.log(response)
+        console.log('response',response) ;
+        setData(response) ;
     }).catch((error) => {
-        console.log(error)
+        alert(error.message + "\n Sign In instead !") ;
+        setNewUser(false) ;
     })
 } 
 

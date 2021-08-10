@@ -26,7 +26,8 @@ export const NetflixButton = ( props ) => {
         padding: props.styles?.padding || "6px 25px",
         textTransform: "none",
         opacity: props.disabled ? '.7' : '1' ,
-        cursor: props.disabled ? 'not-allowed' : 'pointer'
+        cursor: props.disabled ? 'not-allowed' : 'pointer',
+        ...props.style
       }}
     >
       {props.children}
