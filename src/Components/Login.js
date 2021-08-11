@@ -8,7 +8,9 @@ import { createUser, signInUser, SignUpProvider , firebaseSignOut} from "../fire
 import { useHistory } from 'react-router-dom' ;
 import { signOut } from '../redux/userAuth' ;
 import { firebase } from '../firebaseAuth' ;
-
+import './Login.css' ;
+import { FcGoogle } from 'react-icons/fc' ;
+import { GrFacebook } from 'react-icons/gr' ;
 
 const Login = () => {
   const emailAddress = useSelector((state) => state.user.email);
@@ -42,7 +44,7 @@ const Login = () => {
   }, [ data ])
   let passRef = useRef();
   useEffect(() => {
-    if (email) {
+    if (email && !state.signedIn) {
       passRef.current.focus();
     }
   }, []);
@@ -66,6 +68,7 @@ const Login = () => {
   console.log(email, pass, emailErr);
   return (
     <div className="main-page">
+      <div className='login-overlay'></div>
       <Navbar />
       { !state.signedIn ?
         <NetflixSign>
@@ -133,9 +136,14 @@ const Login = () => {
               Sign {newUser ? "In" : "Up"} Now
             </strong>
           </p>
-          <NetflixButton onClick={() => SignUpProvider(setData, setProvider)}>
-            Sign in with Google
-          </NetflixButton>
+          <div className='social-media-login-container'>
+            <button className='social-media-login' onClick={() => SignUpProvider(setData, setProvider)}>
+              <FcGoogle /> Login in with Google
+            </button>
+            <button className='social-media-login' onClick={() => SignUpProvider(setData, setProvider)}>
+              <GrFacebook /> Login in with Facebook
+            </button>
+          </div>
         </NetflixSign>
         :
         <NetflixSign>

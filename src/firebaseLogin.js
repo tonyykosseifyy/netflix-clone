@@ -6,6 +6,8 @@ const googleProvider = new firebase.auth.GoogleAuthProvider() ;
 const facebookProvider = new firebase.auth.FacebookAuthProvider() ;
 
 
+let noUserError = "There is no user record corresponding to this identifier. The user may have been deleted." ;
+let passwordError = "The password is invalid or the user does not have a password."
 
 
 export const SignUpProvider = (setData , setProvider) => {
@@ -16,7 +18,7 @@ export const SignUpProvider = (setData , setProvider) => {
           console.log(result) ;
           setData(result.user) ;
         }).catch((error) => {
-            console.log(error) ;
+            console.log(error.message) ;
             alert(error.message) ;
         })
 } ;
@@ -28,8 +30,9 @@ export const signInUser = ( email , password , setData, setNewUser) => {
         console.log('Sign in response',response.user) ;
         setData(response.user) ;
     }).catch((error) => {
-        alert(error.message + "\n Sign Up instead !")
-        setNewUser(true)
+        alert(error.message + ( error.message === passwordError ? "\nReset Password" : error.message === noUserError ? "\nSign Up Instead" : ''))
+        console.log(error.message) ;
+        error.message === noUserError && setNewUser(true)
     })
 }
 
@@ -39,7 +42,8 @@ export const createUser = (email , password , setData , setNewUser ) => {
         console.log('Sign Up response',response.user) ;
         setData(response.user) ;
     }).catch((error) => {
-        alert(error.message + "\n Sign In instead !") ;
+        alert(error.message + (error.message === "The email address is already in use by another account." ? "\nSign In instead !" : '')) ;
+        console.log(error.message)
         setNewUser(false) ;
     })
 }

@@ -26,9 +26,9 @@ export const MainPage = () => {
   }, [input]);
   console.log(error);
   const submitToSign = (e) => {
-    e && e.preventDefault() 
+    e && e.preventDefault()
     if ( input.trim() && !error ) {
-      setGettingStarted(true) ; 
+      setGettingStarted(true) ;
       dispatch(updateUser({name: 'email' , value: input })) ;
       history.push('/login') ;
     }
@@ -145,6 +145,9 @@ const MainPageContainer = styled.section`
   @media screen and (max-width: 600px) {
     & {
       padding: 0 7px ;
+      height: auto;
+      margin-top: 90px;
+      margin-bottom: 60px ;
     }
     & > div > button {
       display: flex ;

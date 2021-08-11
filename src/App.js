@@ -7,13 +7,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./Components/Login";
 import { firebase } from './firebaseAuth.js' ;
 import { signUp } from './redux/userAuth' ;
-import { useDispatch } from 'react-redux' ;
+import { useDispatch , useSelector } from 'react-redux' ;
 //100 , 300 , 400 , 500 , 700 ;
 
 const App = () => {
   const dispatch = useDispatch() ;
-  const user = firebase.auth().currentUser ;
-
+  const reduxUser = useSelector(state => state.user) ;
+  const [ userData , setUserData ] = useState({})
+  console.log('redux uiser' , reduxUser)
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if ( user ) {
@@ -22,7 +23,7 @@ const App = () => {
           email: user.email ,
           photoURL : user.photoURL
         }))
-
+        setUserData(user)
         console.log('here we have a user' , user)
       } else {
         console.log('we dont have a user')
@@ -36,21 +37,23 @@ const App = () => {
           <Login />
         </Route>
 
-        { user ?
-          <Route path="/">
-            <div className="main-page">
-              <Navbar />
-              <MainPage />
-            </div>
-            <NetflixSection />
+        <Route path="/">
+        { !userData.hasOwnProperty("displayName") ?
+            <>
+              <div className="main-page">
+                <Navbar />
+                <MainPage />
+              </div>
+              <NetflixSection />
+            </>
+              :
+              <div className="main-page">
+                <Navbar />
+                <MainPage />
+              </div>
+            }
           </Route>
-        : <Route path="/">
-          <div className="main-page">
-            <Navbar />
-            <MainPage />
-          </div>
-        </Route>
-      }
+
       </Switch>
       {/*<div className="app">
          if the user is NOT signed in [/signUp]
