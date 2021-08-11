@@ -67,7 +67,7 @@ const Login = () => {
   }, [email]);
   console.log(email, pass, emailErr);
   return (
-    <div className="main-page">
+    <div className="main-page" style={{minHeight: "100vh" , height: "auto"}} >
       <div className='login-overlay'></div>
       <Navbar />
       { !state.signedIn ?

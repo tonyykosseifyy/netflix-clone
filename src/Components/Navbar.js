@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 
 {
   /* let location = useLocation() ;
-    console.log(location) ; 
+    console.log(location) ;
 */
 }
 //ctrl-alt-f
@@ -18,50 +18,11 @@ import { useLocation } from "react-router-dom";
 const Navbar = () => {
   let location = useLocation();
 
-  const user = useSelector((state) => state.user);
-  console.log("user => ", user);
-  const dispatch = useDispatch();
-  const userTest = {
-    name: "tony",
-    email: "tonykosseify123@gmail.com",
-    photoURL: "https://image.com"
-  };
-  const firebaseSign = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(
-        "tonykosseify123@gmail.com",
-        "123tong321123"
-      )
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log("firebase user", user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("firebase err", errorCode, errorMessage);
-      });
-  };
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        var uid = user.uid;
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
-  }, []);
   return (
     <NavContainer className="navbar">
       <NetflixLogo />
       <NetflixButton
         style={{ display: location?.pathname === "/login" ? "none" : "" }}
-        onClick={() => dispatch(signUp(userTest))}
       >
         Sign Up
       </NetflixButton>

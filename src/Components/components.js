@@ -110,6 +110,12 @@ export const NetflixSign = styled.div`
       & {
         width: 100% ;
         background-color: transparent ;
+        padding: 30px 40px ;
+      }
+    }
+    @media (max-width: 600px) {
+      & {
+        padding: 20px 8px ;
       }
     }
 `
