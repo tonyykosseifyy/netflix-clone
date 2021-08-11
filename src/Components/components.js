@@ -103,4 +103,7 @@ export const NetflixSign = styled.div`
       background-color : #3A3A3A ;
       box-shadow: 2px 2px 8px  #2E2A22 ;
     }
+    @media and (max-width: 700px) {
+      width: 100% ;
+    }
 `

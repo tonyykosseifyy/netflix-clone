@@ -2,12 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import { NetflixSign, NetflixButton } from "./components";
 import TextField from "@material-ui/core/TextField";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import Fade from "react-reveal/Fade";
-import { createUser, signInUser, SignUpProvider } from "../firebaseLogin";
+import { createUser, signInUser, SignUpProvider , firebaseSignOut} from "../firebaseLogin";
+import { useHistory } from 'react-router-dom' ;
+import { signOut } from '../redux/userAuth' ;
+import { firebase } from '../firebaseAuth' ;
+
 
 const Login = () => {
   const emailAddress = useSelector((state) => state.user.email);
+  let history = useHistory() ;
+  const state = useSelector((state) => state.user) ;
+  const dispatch = useDispatch() ;
 
   const [newUser, setNewUser] = useState(true);
   const [type, setType] = useState("password");
@@ -17,6 +24,22 @@ const Login = () => {
   const [data, setData] = useState({});
   const [provider, setProvider] = useState(false);
 
+  const [ signedOutSuccess , setSignedOutSuccess ] = useState(false) ;
+
+  const firebaseSignOut = () => {
+    firebase.auth().signOut().then(() => {
+      dispatch(signOut())
+    }).catch((error) => {
+      console.log(error) ;
+      alert(error.message)
+    })
+  }
+
+  useEffect(() => {
+    if ( data.hasOwnProperty('displayName') ) {
+      history.push('/') ;
+    }
+  }, [ data ])
   let passRef = useRef();
   useEffect(() => {
     if (email) {
@@ -44,75 +67,89 @@ const Login = () => {
   return (
     <div className="main-page">
       <Navbar />
-      <NetflixSign>
-        <h1>Sign {newUser ? "Up" : "In"} </h1>
-        <form autoComplete="off" onSubmit={() => handleSubmit()}>
-          <div
-            style={{ position: "relative", marginBottom: "15px" }}
-            className="netflix-sign-inputs"
-          >
-            <TextField
-              required
-              label="Email Address"
-              variant="filled"
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Fade when={emailErr} right>
-              <p>Please enter a valid email ! </p>
-            </Fade>
-          </div>
-
-          <div
-            style={{ position: "relative", marginBottom: "15px" }}
-            className="netflix-sign-inputs"
-          >
-            <TextField
-              required
-              inputRef={passRef}
-              label="Password"
-              variant="filled"
-              type={type}
-              name="password"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-            />
-            <span
-              onClick={() =>
-                setType((prev) => (prev === "password" ? "text" : "password"))
-              }
+      { !state.signedIn ?
+        <NetflixSign>
+          <h1>Sign {newUser ? "Up" : "In"} </h1>
+          <form autoComplete="off" onSubmit={() => handleSubmit()}>
+            <div
+              style={{ position: "relative", marginBottom: "15px" }}
+              className="netflix-sign-inputs"
             >
-              {type === "password" ? "show" : "hide"}
-            </span>
-            <Fade when={pass.length < 8 && pass.trim()} right>
-              <p>Password must contain at least 8 characters </p>
-            </Fade>
-          </div>
+              <TextField
+                required
+                label="Email Address"
+                variant="filled"
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Fade when={emailErr} right>
+                <p>Please enter a valid email ! </p>
+              </Fade>
+            </div>
 
-          <NetflixButton
-            onClick={() => handleSubmit()}
-            type="submit"
-            disabled={emailErr || pass.length < 8}
-            className={`netflix-button-login ${
-              emailErr || pass.length < 8 ? "" : "netflix-button-login-hover"
-            }`}
-            styles={{ padding: "12px 25px" }}
-          >
-            Sign {newUser ? "Up" : "In"}
+            <div
+              style={{ position: "relative", marginBottom: "15px" }}
+              className="netflix-sign-inputs"
+            >
+              <TextField
+                required
+                inputRef={passRef}
+                label="Password"
+                variant="filled"
+                type={type}
+                name="password"
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
+              />
+              <span
+                onClick={() =>
+                  setType((prev) => (prev === "password" ? "text" : "password"))
+                }
+              >
+                {type === "password" ? "show" : "hide"}
+              </span>
+              <Fade when={pass.length < 8 && pass.trim()} right>
+                <p>Password must contain at least 8 characters </p>
+              </Fade>
+            </div>
+
+            <NetflixButton
+              onClick={() => handleSubmit()}
+              type="submit"
+              disabled={emailErr || pass.length < 8}
+              className={`netflix-button-login ${
+                emailErr || pass.length < 8 ? "" : "netflix-button-login-hover"
+              }`}
+              styles={{ padding: "12px 25px" }}
+            >
+              Sign {newUser ? "Up" : "In"}
+            </NetflixButton>
+          </form>
+          <p>
+            {newUser ? "Have an Account?" : "New to Netflix?"}{" "}
+            <strong onClick={() => setNewUser((prev) => !prev)}>
+              Sign {newUser ? "In" : "Up"} Now
+            </strong>
+          </p>
+          <NetflixButton onClick={() => SignUpProvider(setData, setProvider)}>
+            Sign in with Google
           </NetflixButton>
-        </form>
-        <p>
-          {newUser ? "Have an Account?" : "New to Netflix?"}{" "}
-          <strong onClick={() => setNewUser((prev) => !prev)}>
-            Sign {newUser ? "In" : "Up"} Now
-          </strong>
-        </p>
+        </NetflixSign>
+        :
+        <NetflixSign>
+          <h1>You are already Signed in {state.displayName !== null ? state.displayName : ''} !</h1>
+            <NetflixButton
+              onClick={() => firebaseSignOut()}
+              className='netflix-button-login netflix-button-login-hover'
+              styles={{ padding: "12px 25px" }}
+            >
+              Sign Out
+            </NetflixButton>
       </NetflixSign>
-      <NetflixButton onClick={() => SignUpProvider(setData, setProvider)}>
-        Sign in with Google
-      </NetflixButton>
+       }
+
     </div>
   );
 };
