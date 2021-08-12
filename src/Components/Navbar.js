@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Navbar.css";
 import styled from "styled-components";
 import { NetflixLogo, NetflixButton } from "./components.js";
-import Button from "@material-ui/core/Button";
-import { useSelector, useDispatch } from "react-redux";
-import { signUp, signOut, updateUser } from "../redux/userAuth.js";
-import { firebase } from "../firebaseAuth";
 import { useLocation , Link } from "react-router-dom";
 
 

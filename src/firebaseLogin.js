@@ -24,26 +24,26 @@ export const SignUpProvider = (setData , provider ) => {
 } ;
 
 
-export const signInUser = ( email , password , setData, setNewUser) => {
+export const signInUser = ( email , password , setData, setNewUser , setMessage , setOpen ) => {
     firebase.auth().signInWithEmailAndPassword(email , password )
     .then((response) => {
         console.log('Sign in response',response.user) ;
         setData(response.user) ;
     }).catch((error) => {
-        alert(error.message + ( error.message === passwordError ? "\nReset Password" : error.message === noUserError ? "\nSign Up Instead" : ''))
-        console.log(error.message) ;
+        setOpen(true)
+        setMessage(error.message + ( error.message === passwordError ? "\nReset Password" : error.message === noUserError ? "\nSign Up Instead" : ''))
         error.message === noUserError && setNewUser(true)
     })
 }
 
-export const createUser = (email , password , setData , setNewUser ) => {
+export const createUser = (email , password , setData , setNewUser , setMessage , setOpen ) => {
     firebase.auth().createUserWithEmailAndPassword(email , password)
     .then((response) => {
         console.log('Sign Up response',response.user) ;
         setData(response.user) ;
     }).catch((error) => {
-        alert(error.message + (error.message === "The email address is already in use by another account." ? "\nSign In instead !" : '')) ;
-        console.log(error.message)
+        setOpen(true)
+        setMessage(error.message + (error.message === "The email address is already in use by another account." ? "\nSign In instead !" : ''))
         setNewUser(false) ;
     })
 }

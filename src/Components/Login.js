@@ -12,6 +12,14 @@ import './Login.css' ;
 import { FcGoogle } from 'react-icons/fc' ;
 import { GrFacebook } from 'react-icons/gr' ;
 import { AiOutlineArrowLeft } from 'react-icons/ai' ;
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+
+function SlideTransition(props) {
+  return <Slide {...props} direction="down" />;
+}
+
 
 
 const Login = () => {
@@ -27,6 +35,9 @@ const Login = () => {
   const [emailErr, setEmailErr] = useState(false);
   const [data, setData] = useState({});
   const [provider, setProvider] = useState(false);
+
+  const [ open , setOpen ] = useState(false) ;
+  const [ errorMessage , setErrorMessage ] = useState('') ;
 
   const [ signedOutSuccess , setSignedOutSuccess ] = useState(false) ;
 
@@ -54,9 +65,9 @@ const Login = () => {
     console.log("submitting");
     if (!emailErr && pass.length > 8) {
       if (newUser) {
-        createUser(email, pass, setData, setNewUser);
+        createUser(email, pass, setData, setNewUser , setErrorMessage ,setOpen);
       } else {
-        signInUser(email, pass, setData, setNewUser);
+        signInUser(email, pass, setData, setNewUser , setErrorMessage ,setOpen );
       }
     }
   };
@@ -68,8 +79,16 @@ const Login = () => {
     }
   }, [email]);
   console.log(email, pass, emailErr);
+
   return (
     <div className="main-page" style={{minHeight: "100vh" , height: "auto"}} >
+
+      <Snackbar TransitionComponent={SlideTransition} anchorOrigin={{ vertical: "top", horizontal:"center" }} open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+        <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error">
+          {errorMessage}
+        </MuiAlert>
+      </Snackbar>
+
       <div className='login-overlay'></div>
       <Navbar />
       { !state.signedIn ?

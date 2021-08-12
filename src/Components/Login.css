@@ -1,3 +1,4 @@
+
 .social-media-login-container {
   margin: 20px 0 10px 0 ;
 }
@@ -40,15 +41,45 @@
   font-size: 25px ;
   margin-right: 7px ;
 }
+
 .go-home-link {
   margin-top: 15px ;
   text-decoration: none ;
-  display: flex ;
-  align-items: center;
   cursor: pointer;
-  color: #637373; 
+  color: #637373;
+  position: relative;
+  width: fit-content;
+  padding-bottom: 7px ;
+}
+
+
+.go-home-link::before {
+  position:absolute;
+  content: '' ;
+  bottom: 0 ;
+  right: 0 ;
+  width: 0% ;
+  height: 2px ;
+  background-color: #637373 ;
+  transition: .3s ease-out;
 }
 
 .go-home-link > svg {
-  margin-right: 7px ;
+  font-size: 23px ;
+  position: absolute;
+  bottom: 0 ;
+  right: 0 ;
+  transition: .3s ease-out;
+  opacity: 1 ;
+  transform: translate(0px, 10.5px);
+  opacity: 0 ;
+}
+
+.go-home-link:hover > svg {
+  transform: translate(-105px,10.5px);
+  opacity: 1 ;
+}
+
+.go-home-link:hover::before {
+  width: 100% ;
 }
