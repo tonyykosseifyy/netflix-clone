@@ -10,10 +10,10 @@ let noUserError = "There is no user record corresponding to this identifier. The
 let passwordError = "The password is invalid or the user does not have a password."
 
 
-export const SignUpProvider = (setData , setProvider) => {
+export const SignUpProvider = (setData , provider ) => {
   console.log('doing') ;
     firebase.auth()
-        .signInWithPopup(googleProvider)
+        .signInWithPopup(provider === "google" ? googleProvider : facebookProvider )
         .then((result) => {
           console.log(result) ;
           setData(result.user) ;

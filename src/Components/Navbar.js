@@ -6,7 +6,8 @@ import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { signUp, signOut, updateUser } from "../redux/userAuth.js";
 import { firebase } from "../firebaseAuth";
-import { useLocation } from "react-router-dom";
+import { useLocation , Link } from "react-router-dom";
+
 
 {
   /* let location = useLocation() ;
@@ -21,11 +22,13 @@ const Navbar = () => {
   return (
     <NavContainer className="navbar">
       <NetflixLogo />
-      <NetflixButton
-        style={{ display: location?.pathname === "/login" ? "none" : "" }}
-      >
-        Sign Up
-      </NetflixButton>
+      <Link to='/login' className='no-styling-link'>
+        <NetflixButton
+          style={{ display: location?.pathname === "/login" ? "none" : "" }}
+        >
+          Sign Up
+        </NetflixButton>
+      </Link>
     </NavContainer>
   );
 };

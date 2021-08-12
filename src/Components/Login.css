@@ -40,3 +40,15 @@
   font-size: 25px ;
   margin-right: 7px ;
 }
+.go-home-link {
+  margin-top: 15px ;
+  text-decoration: none ;
+  display: flex ;
+  align-items: center;
+  cursor: pointer;
+  color: #637373; 
+}
+
+.go-home-link > svg {
+  margin-right: 7px ;
+}

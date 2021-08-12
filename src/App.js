@@ -8,6 +8,7 @@ import Login from "./Components/Login";
 import { firebase } from './firebaseAuth.js' ;
 import { signUp } from './redux/userAuth' ;
 import { useDispatch , useSelector } from 'react-redux' ;
+import Home from './Components/Home' ;
 //100 , 300 , 400 , 500 , 700 ;
 
 const App = () => {
@@ -47,10 +48,7 @@ const App = () => {
               <NetflixSection />
             </>
               :
-              <div className="main-page">
-                <Navbar />
-                <MainPage />
-              </div>
+              <Home />
             }
           </Route>
 

@@ -5,12 +5,14 @@ import TextField from "@material-ui/core/TextField";
 import { useSelector , useDispatch } from "react-redux";
 import Fade from "react-reveal/Fade";
 import { createUser, signInUser, SignUpProvider , firebaseSignOut} from "../firebaseLogin";
-import { useHistory } from 'react-router-dom' ;
+import { useHistory , Link } from 'react-router-dom' ;
 import { signOut } from '../redux/userAuth' ;
 import { firebase } from '../firebaseAuth' ;
 import './Login.css' ;
 import { FcGoogle } from 'react-icons/fc' ;
 import { GrFacebook } from 'react-icons/gr' ;
+import { AiOutlineArrowLeft } from 'react-icons/ai' ;
+
 
 const Login = () => {
   const emailAddress = useSelector((state) => state.user.email);
@@ -137,10 +139,10 @@ const Login = () => {
             </strong>
           </p>
           <div className='social-media-login-container'>
-            <button className='social-media-login' onClick={() => SignUpProvider(setData, setProvider)}>
+            <button className='social-media-login' onClick={() => SignUpProvider(setData, "google")}>
               <FcGoogle /> Login in with Google
             </button>
-            <button className='social-media-login' onClick={() => SignUpProvider(setData, setProvider)}>
+            <button className='social-media-login' onClick={() => SignUpProvider(setData, "facebook")}>
               <GrFacebook /> Login in with Facebook
             </button>
           </div>
@@ -151,10 +153,14 @@ const Login = () => {
             <NetflixButton
               onClick={() => firebaseSignOut()}
               className='netflix-button-login netflix-button-login-hover'
-              styles={{ padding: "12px 25px" }}
+              styles={{ padding: "15px 25px" }}
             >
               Sign Out
             </NetflixButton>
+            <Link className='go-home-link' to='/'>
+              <AiOutlineArrowLeft />
+              Go Back Home
+            </Link>
       </NetflixSign>
        }
 
