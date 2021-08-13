@@ -4,7 +4,7 @@ import { NetflixSign, NetflixButton } from "./components";
 import TextField from "@material-ui/core/TextField";
 import { useSelector , useDispatch } from "react-redux";
 import Fade from "react-reveal/Fade";
-import { createUser, signInUser, SignUpProvider , firebaseSignOut} from "../firebaseLogin";
+import { createUser, signInUser, SignUpProvider , firebaseSignOut , resetPassword, alreadyInUse ,passwordError, noUserError } from "../firebaseLogin";
 import { useHistory , Link } from 'react-router-dom' ;
 import { signOut } from '../redux/userAuth' ;
 import { firebase } from '../firebaseAuth' ;
@@ -15,11 +15,24 @@ import { AiOutlineArrowLeft } from 'react-icons/ai' ;
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button' ;
+
 
 function SlideTransition(props) {
   return <Slide {...props} direction="down" />;
 }
-
+const AlertButton = (props) => {
+  return (
+      <Button
+        style={{color: 'white', display: props.children === "" ? "none" : "" , borderColor: "white" , fontSize:"0.74rem"}}
+        variant="outlined"
+        size="small"
+        onClick={(props.errorMessage === passwordError ) ? props.func : props.setOpen }
+        >
+        {props.children}
+      </Button>
+  )
+}
 
 
 const Login = () => {
@@ -38,7 +51,7 @@ const Login = () => {
 
   const [ open , setOpen ] = useState(false) ;
   const [ errorMessage , setErrorMessage ] = useState('') ;
-
+  const [ severity , setSeverity ] = useState('error') ;
   const [ signedOutSuccess , setSignedOutSuccess ] = useState(false) ;
 
   const firebaseSignOut = () => {
@@ -79,13 +92,29 @@ const Login = () => {
     }
   }, [email]);
   console.log(email, pass, emailErr);
-
+  useEffect(() => {
+    if ( errorMessage === "A password reset email has been sent to you. Please check your email inbox to reset your password.") {
+      setSeverity("info") ;
+    } else {
+      setSeverity('error')
+    }
+  }, [ errorMessage ])
+  const resetPasswordFunction = () => {
+    setOpen(true) ;
+    resetPassword(email, setErrorMessage , setOpen) ;
+    setErrorMessage("A password reset email has been sent to you. Please check your email inbox to reset your password.")
+  }
   return (
     <div className="main-page" style={{minHeight: "100vh" , height: "auto"}} >
 
-      <Snackbar TransitionComponent={SlideTransition} anchorOrigin={{ vertical: "top", horizontal:"center" }} open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
-        <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity="error">
+      <Snackbar TransitionComponent={SlideTransition} anchorOrigin={{ vertical: "top", horizontal:"center" }} open={open}  onClose={() => setOpen(false)}>
+        <MuiAlert elevation={6} variant="filled" onClose={() => setOpen(false)} severity={severity} >
           {errorMessage}
+          <AlertButton func={() => resetPasswordFunction()} setOpen={() => setOpen(false)} errorMessage={errorMessage} >
+            {( errorMessage === passwordError ? "Reset Password"
+            : errorMessage === noUserError ? "Sign Up Instead" : errorMessage === alreadyInUse ? 'Sign in Instead' : '')}
+          </AlertButton>
+
         </MuiAlert>
       </Snackbar>
 
