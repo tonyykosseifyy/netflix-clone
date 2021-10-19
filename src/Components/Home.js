@@ -7,7 +7,8 @@ import { useLocation } from "react-router-dom";
 
 
 const Home = () => {
-
+  const pathname = useLocation() ;
+  console.log("pathname =>>" , pathname) ;
   return (
     <div className='home'>
       <Navbar home={true} />

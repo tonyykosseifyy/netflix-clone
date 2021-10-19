@@ -42,7 +42,7 @@ const Navbar = ({ home }) => {
 
       <div className="navbar-link-container" style={{display: signedIn ? "" : "none"}}>
         <Link to="/">Home</Link>
-        <Link to="/browse?search=tv-shows">TV Shows</Link>
+        <Link to="/search?tv-shows">TV Shows</Link>
         <Link to="/browse?search=movies">Movies</Link>
         <Link to="/browse?search=recently-added">Recently Added</Link>
         <Link to="/browse?search=my-list">My List</Link>
