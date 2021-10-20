@@ -32,6 +32,7 @@
     color: var(--netflix-red);
 }
 
+
 @media screen and (max-width: 1024px) {
     .row-image img {
         max-height: 100px;
