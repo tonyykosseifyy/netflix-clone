@@ -13,7 +13,7 @@
     margin: 10px 0 ;
 }
 
-.row-image > img {
+.row-image img {
     max-height: 130px;
     object-fit: contain ;
     margin-right: 5px;
@@ -21,7 +21,30 @@
     cursor: pointer;
 }
 
-.row-image > img:hover {
+.row-image img:hover {
     transform: scale(1.09) ;
 }
 
+.row-image .swiper-slide {
+    position: static ;
+}
+.row .row-image .swiper-button-next , .row .row-image .swiper-button-prev {
+    color: var(--netflix-red);
+}
+
+@media screen and (max-width: 1024px) {
+    .row-image img {
+        max-height: 100px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .row-image img {
+        max-height: 80px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .row-image img {
+        max-height: 60px;
+    }
+}

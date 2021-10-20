@@ -7,12 +7,15 @@ import SwiperCore, { Navigation } from 'swiper';
 
 // Import Swiper styles
 //npm install swiper@6.8.4
-import "swiper/css/bundle";
-SwiperCore.use([Pagination]);
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+SwiperCore.use([Navigation]);
 
 //movie.poster_path : movie.backdrop_path
 const Row = ({ title , url }) => {
     const [ movies , setMovies ] = useState([]);
+    const [ width , setWidth ] = useState(window.innerWidth) ;
     const fetchMovies = async () => {
         try {
             const response = await axios.get(url) ;
@@ -25,22 +28,36 @@ const Row = ({ title , url }) => {
         fetchMovies() ;
     },[])
     console.log(movies) ;
+    window.addEventListener("resize" , () => setWidth(window.innerWidth)) ;
     return (
         <div className='row'>
             <h1>{title}</h1>
-            <div className='row-image'>
+            <Swiper 
+                slidesPerView={(width - 40) / 235}
+                spaceBetween={5} 
+                freeMode={true} 
+                navigation={{"clickable": true}}
+                navigation 
+                className="mySwiper row-image"
+            >
                 { movies.map((movie , index) => (
-                    <img key={movie.id} src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
+                    <SwiperSlide key={movie.id}>
+                        <img src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
+                    </SwiperSlide>
                 ))}
-            </div>
+            </Swiper>
+            
         </div>
     );
 };
 
 export default Row ;
 
-/*<Swiper slidesPerView={3} spaceBetween={30} freeMode={true} pagination={{
-  "clickable": true
-}} className="mySwiper">
-  <SwiperSlide>Slide 1</SwiperSlide><SwiperSlide>Slide 2</SwiperSlide><SwiperSlide>Slide 3</SwiperSlide><SwiperSlide>Slide 4</SwiperSlide><SwiperSlide>Slide 5</SwiperSlide><SwiperSlide>Slide 6</SwiperSlide><SwiperSlide>Slide 7</SwiperSlide><SwiperSlide>Slide 8</SwiperSlide><SwiperSlide>Slide 9</SwiperSlide>
-  </Swiper>*/
+
+/*
+<div className='row-image'>
+                { movies.map((movie , index) => (
+                    <img key={movie.id} src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
+                ))}
+            </div>
+            */
