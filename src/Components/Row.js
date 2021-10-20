@@ -16,6 +16,16 @@ SwiperCore.use([Navigation]);
 const Row = ({ title , url }) => {
     const [ movies , setMovies ] = useState([]);
     const [ width , setWidth ] = useState(window.innerWidth) ;
+
+    const slidesFunction = () => {
+        if ( width > 1024 ) {
+            return (width - 40) / 235
+        } else if (width > 700 ) {
+            return (width - 40) / 180
+        } else if (width > 500 ) {
+            return (width - 40) / 144
+        } else return (width - 40) / 108
+    }
     const fetchMovies = async () => {
         try {
             const response = await axios.get(url) ;
@@ -33,7 +43,7 @@ const Row = ({ title , url }) => {
         <div className='row'>
             <h1>{title}</h1>
             <Swiper 
-                slidesPerView={(width - 40) / 235}
+                slidesPerView={slidesFunction()}
                 spaceBetween={5} 
                 freeMode={true} 
                 navigation={{"clickable": true}}
