@@ -10,11 +10,7 @@
 .home {
   color: white;
 }
-.home > .navbar {
-  background: transparent;
-  position: relative ;
-  z-index: 100 ;
-}
+
 .home > .navbar::before {
   content: '' ;
   position: absolute ;

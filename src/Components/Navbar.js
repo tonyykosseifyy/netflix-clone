@@ -23,8 +23,11 @@ const Navbar = ({ home }) => {
   let location = useLocation();
   const signedIn = useSelector(state => state.user.signedIn)
   const [ open , setOpen ] = useState(false) ;
+  const [ scroll , setScroll ] = useState(false) ;
+  window.addEventListener("scroll" , () => setScroll(window.scrollY)) ;
+
   return (
-    <NavContainer className="navbar" home={home}>
+    <NavContainer className="navbar" home={home} scroll={scroll} >
       <Link to="/" className='no-styling-link' >
         <NetflixLogo />
       </Link>
@@ -70,12 +73,18 @@ const Navbar = ({ home }) => {
 export default Navbar;
 
 const NavContainer = styled.nav`
+  z-index: 100000 ;
   height: 120px;
   padding: 25px 4.3vw;
   display: flex;
   justify-content: ${props => props.home ? "" : "space-between"} ;
   align-items: center;
-  position: relative;
+  position: ${props => props.scroll > 70 ? "sticky" : "relative"} ;
+  top: 0 ;
+  left: 0 ;
+  right: 0 ;
+  background-color: ${props => props.scroll > 70 ? "black" : "transparent"};
+  transition: .5s ease-in-out ;
 `;
 
 const BrowseContainer = styled.div`
