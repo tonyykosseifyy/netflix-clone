@@ -4,18 +4,29 @@ import axios from "../axios" ;
 import { base_url } from "../requests" ;
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from 'swiper';
+import YouTube from 'react-youtube';
+import movieTrailer from 'movie-trailer';
 
-// Import Swiper styles
-//npm install swiper@6.8.4
+
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
 SwiperCore.use([Navigation]);
 
+const opts = {
+    height: "390",
+    width: "99%",
+    playerVars: {
+      autoplay: 1,
+    }
+  }
+
+
 //movie.poster_path : movie.backdrop_path
 const Row = ({ title , url }) => {
     const [ movies , setMovies ] = useState([]);
     const [ width , setWidth ] = useState(window.innerWidth) ;
+    const [trailerUrl, setTrailerUrl] = useState("");
 
     const slidesFunction = () => {
         if ( width > 1024 ) {
@@ -37,6 +48,17 @@ const Row = ({ title , url }) => {
     useEffect(() => {
         fetchMovies() ;
     },[])
+    const handleClick = (movie) => {
+        if (trailerUrl) {
+          setTrailerUrl('');
+        } else {
+          movieTrailer(movie?.title || "")
+            .then(url => {
+              const urlParams = new URLSearchParams(new URL(url).search);
+              setTrailerUrl(urlParams.get('v'));
+            }).catch((error) => console.log(error));
+        }
+    }
     console.log(movies) ;
     window.addEventListener("resize" , () => setWidth(window.innerWidth)) ;
     return (
@@ -52,11 +74,14 @@ const Row = ({ title , url }) => {
             >
                 { movies.map((movie , index) => (
                     <SwiperSlide key={movie.id}>
-                        <img src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
+                        <img onClick={() => handleClick(movie)} src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
                     </SwiperSlide>
                 ))}
             </Swiper>
-            
+            <div style={{ padding: "40px" }}>
+                {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+            </div>
+
         </div>
     );
 };
