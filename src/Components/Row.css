@@ -4,6 +4,9 @@
 .row > h1 {
     font-size: 1.1rem;
 }
+.row-image::-webkit-scrollbar {
+    display: none ;
+}
 .row-image {
     display: flex ;
     overflow-y: hidden ;
