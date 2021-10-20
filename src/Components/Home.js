@@ -5,9 +5,8 @@ import { useLocation } from "react-router-dom";
 import requests from "../requests" ;
 import Row from "./Row" ;
 import Banner from "./Banner";
-
-/*function truncate(str, n) {
-  return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+import styled from "styled-components";
+/*
 }*/
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -22,12 +21,14 @@ const Home = () => {
   return (
     <div className='home'>
       <Navbar home={true} />
-      <Banner url={requests.fetchNetflixOriginals} />
-      <Row title="Netlfix Originals" url={requests.fetchNetflixOriginals} />
-      <Row title="Trending" url={requests.fetchTrending} />
-      <Row title="Top Rated" url={requests.fetchTopRated} />
+      <Banner url={requests.fetchTrending} />
+      <RowsContainer>
+        <Row title="Netlfix Originals" url={requests.fetchNetflixOriginals} />
+        <Row title="Trending" url={requests.fetchTrending} />
+      </RowsContainer>
+      {/*<Row title="Top Rated" url={requests.fetchTopRated} />
       <Row title="Action Movies" url={requests.fetchActionMovies} />
-      <Row title="Horror Movies" url={requests.fetchHorrorMovies} />
+      <Row title="Horror Movies" url={requests.fetchHorrorMovies} />*/}
     </div>
   );
 };
@@ -35,3 +36,10 @@ const Home = () => {
 
 
 export default Home ;
+
+const RowsContainer = styled.section`
+  margin-top: -150px;
+  position: relative ;
+  padding-left: 40px;
+  z-index: 100 ;
+`

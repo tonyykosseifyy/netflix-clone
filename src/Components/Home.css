@@ -1,6 +1,6 @@
 .home {
   min-height: 150vh ;
-  background-color: #0C0C0C ;
+  background-color: #141414; 
 }
 
 
@@ -8,5 +8,24 @@
 
 
 .home {
+  color: white;
+}
+.home > .navbar {
+  background: transparent;
+  position: relative ;
+  z-index: 100 ;
+}
+.home > .navbar::before {
+  content: '' ;
+  position: absolute ;
+  top: 0;
+  left: 0 ;
+  right: 0 ;
+  width: 100% ;
+  bottom: 0 ;
+  z-index: -1 ;
+  background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
+}
+.home > .navbar > .navbar-link-container > a {
   color: white;
 }

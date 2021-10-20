@@ -1,13 +1,19 @@
+.row {
+    margin-bottom: 40px;
+}
+.row > h1 {
+    font-size: 1.1rem;
+}
 .row-image {
     display: flex ;
     overflow-y: hidden ;
-    padding: 20px;
+    margin: 10px 0 ;
 }
 
 .row-image > img {
-    max-height: 80px;
+    max-height: 130px;
     object-fit: contain ;
-    margin-right: 10px;
+    margin-right: 5px;
     transition: .3s ease-out ;
     cursor: pointer;
 }

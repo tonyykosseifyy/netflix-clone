@@ -1,8 +1,9 @@
 import { useState , useEffect } from "react" ;
 import "./Row.css" ;
 import axios from "../axios" ;
+import { base_url } from "../requests" ;
 
-const base_url = "https://image.tmdb.org/t/p/original" ;
+
 //movie.poster_path : movie.backdrop_path
 const Row = ({ title , url }) => {
     const [ movies , setMovies ] = useState([]);
@@ -23,7 +24,7 @@ const Row = ({ title , url }) => {
             <h1>{title}</h1>
             <div className='row-image'>
                 { movies.map((movie , index) => (
-                    <img src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
+                    <img key={movie.id} src={`${base_url}${movie.backdrop_path}`} alt={movie.name} />
                 ))}
             </div>
         </div>
