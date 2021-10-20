@@ -16,12 +16,25 @@ export const PlayButton = styled(Button)`
     color: white ;
     display: flex ;
     align-items: center ;
-    border-radius: 12px;
+    border-radius: 26px;
     transition: .3s ease-out ;
     margin-top: 30px ;
-    padding: 7px 20px ;
+    padding: 14px 26px ;
     text-transform: uppercase ;
+
+    & > svg {
+        margin-right: 1px;
+        font-size: 1rem;
+    }
     &:hover {
+        opacity: .9 ;
         box-shadow: 1px 1px 4px var(--red), -1px -1px 4px var(--red) ;
     }
+`
+
+export const AddButton = styled(PlayButton)`
+    background-color: black ;
+    color: white ;
+    margin-left: 10px;
+
 `

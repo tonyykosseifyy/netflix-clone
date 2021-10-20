@@ -2,8 +2,10 @@ import { useState , useEffect } from "react";
 import axios from "../axios" ;
 import styled from "styled-components" ;
 import { base_url , API_KEY } from "../requests" ;
-import { PlayButton } from "../ReusableComponents"; 
+import { PlayButton , AddButton} from "../ReusableComponents"; 
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import AddIcon from '@material-ui/icons/Add';
+
 
 const truncate = (str, n) => str?.length > n ? str.substr(0, n - 1) + "..." : str
 
@@ -25,7 +27,10 @@ const Banner = ({ url }) => {
         <BannerWrapper url={`${base_url}${movie?.backdrop_path}`}>
             <BannerTitle>{movie?.title || movie?.name}</BannerTitle>
             <BannerDescription>{truncate(movie?.overview, 320)}</BannerDescription>
-            <PlayButton>Watch</PlayButton>
+            <FlexContainer>
+                <PlayButton><PlayArrowIcon size="small" />Watch</PlayButton>
+                <AddButton><AddIcon />Add List</AddButton>
+            </FlexContainer>
         </BannerWrapper>
     );
 };
@@ -64,4 +69,8 @@ const BannerTitle = styled.h1`
 const BannerDescription = styled.p`
     max-width: 500px;
     margin-top: 20px;
+`
+
+const FlexContainer = styled.div`
+    display: flex;
 `
