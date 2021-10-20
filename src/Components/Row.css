@@ -1,0 +1,18 @@
+.row-image {
+    display: flex ;
+    overflow-y: hidden ;
+    padding: 20px;
+}
+
+.row-image > img {
+    max-height: 80px;
+    object-fit: contain ;
+    margin-right: 10px;
+    transition: .3s ease-out ;
+    cursor: pointer;
+}
+
+.row-image > img:hover {
+    transform: scale(1.09) ;
+}
+

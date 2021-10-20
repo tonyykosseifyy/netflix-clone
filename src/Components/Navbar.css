@@ -1,5 +1,8 @@
-.no-styling-link {
-  text-decoration: none ;
+.home > .navbar {
+  background-color: black ;
+  padding: 20px 4.3vw 0 4.3vw;
+  height: 70px ;
+  overflow-y: hidden ;
 }
 
 
@@ -10,4 +13,48 @@
   fill: var(--netflix-red);
   max-width: 180px;
   min-width: 100px;
+}
+
+.navbar-link-container {
+  align-self: stretch ;
+  margin-left: 30px ;
+}
+
+.navbar-link-container > a::before {
+  content: "" ;
+  position: absolute ;
+  bottom: 0 ;
+  left: 0;
+  right: 0 ;
+  width: 100% ;
+  height: 3px ;
+  background-color: transparent;
+  transition: .3s ease-out ;
+}
+
+.navbar-link-container > a.active::before {
+  background-color:red;
+}
+
+.navbar-link-container > a {
+  text-decoration: none ;
+  color: #a3a4a5 ;
+  cursor: pointer ;
+  margin: 0px 12px ;
+  margin-top: 11px;
+  transition: .3s ease-out ;
+  font-size: 15.5px ;
+  position: relative ;
+}
+
+.navbar-link-container > a:hover {
+  color: white ;
+}
+.navbar-link-container > a.active {
+  font-weight: bold ;
+  color: white ;
+}
+
+.no-styling-link {
+  text-decoration: none ;
 }

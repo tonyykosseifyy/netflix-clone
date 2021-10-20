@@ -15,11 +15,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const checkIfActive = (query , value ) => {
-  if( query.get("search") === value ) {
-    return "active"
-  } else return ""
-}
+const checkIfActive = (query , value ) => query.get("search") === value ? "active" : "" ;
 
 const Navbar = ({ home }) => {
   let query = useQuery() ;
@@ -40,14 +36,13 @@ const Navbar = ({ home }) => {
         </NetflixButton>
       </Link>
 
-      <div className="navbar-link-container" style={{display: signedIn ? "" : "none"}}>
-        <Link to="/">Home</Link>
-        <Link to="/search?tv-shows">TV Shows</Link>
-        <Link to="/browse?search=movies">Movies</Link>
-        <Link to="/browse?search=recently-added">Recently Added</Link>
-        <Link to="/browse?search=my-list">My List</Link>
+      <div className="navbar-link-container" style={{display: signedIn ? "flex" : "none"}}>
+        <Link className={checkIfActive(query,null)} to="/">Home</Link>
+        <Link className={checkIfActive(query,"tv-shows")} to="/browse?search=tv-shows">TV Shows</Link>
+        <Link className={checkIfActive(query,"movies")} to="/browse?search=movies">Movies</Link>
+        <Link className={checkIfActive(query,"recently-added")} to="/browse?search=recently-added">Recently Added</Link>
+        <Link className={checkIfActive(query,"my-list")} to="/browse?search=my-list">My List</Link>
       </div>
-
 
     </NavContainer>
   );
