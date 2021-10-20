@@ -49,10 +49,9 @@ const Navbar = ({ home }) => {
       
 
       <div 
-        className="navbar-link-container" 
+        className={`navbar-link-container ${open && 'open'}`} 
         style={{
           display: signedIn ? "flex" : "none", 
-          transform:open?"scaleY(1)":"",
           transition: open ? ".3s cubic-bezier(0.18, 0.89, 0.32, 1.28)":".1s ease-out",
         }}
           >
