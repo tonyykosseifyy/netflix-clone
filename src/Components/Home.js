@@ -32,6 +32,7 @@ const Home = () => {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [ open , setOpen ] = useState(false) ;
   const [ movie , setMovie ] = useState({}) ;
+  
   console.log("home Movie=>" , movie);
   const handleClick = (movie) => {
       setMovie(movie);
@@ -84,7 +85,9 @@ const Home = () => {
               {movie?.first_air_date && <span>first air date: <strong>{movie?.first_air_date}</strong></span>}
           </div>
         }
-              
+          <div className='similar-movies'>
+            <h1>Similar Movies</h1>
+          </div>
         </DetailsChild>
       </DetailsContainer>
 
