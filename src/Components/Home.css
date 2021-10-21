@@ -25,3 +25,43 @@
 .home > .navbar > .navbar-link-container > a {
   color: white;
 }
+
+.details-description {
+  padding: 20px 40px ;
+  display: flex ;
+  flex-direction: column;
+}
+.details-description > p {
+  max-width: 600px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 10px;
+}
+.details-description > .description-header > h1 {
+  margin: 20px 0 ;
+}
+.description-header {
+  display: flex ;
+  align-items: center ;
+  justify-content: space-between;
+}
+.description-header > span {
+  display: flex;
+  align-items: center;
+}
+.description-header > span > svg {
+  margin-left: 2px;
+  color: #D66345 ;
+}
+.description-header > h1 > span {
+  font-weight: lighter;
+}
+.details-description > span {
+  margin: 6px 0 ;
+  color: #777777 ;
+  font-size: 15.5px;
+  text-transform: capitalize;
+}
+.details-description > span > strong {
+  color: white ;
+}
