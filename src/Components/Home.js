@@ -94,14 +94,6 @@ const Home = () => {
     </div>
   );
 };
-/*
-genre_ids: (3) [10759, 9648, 18]
-id: 93405
-media_type: "tv"
-origin_country: ['KR']
-original_language: "ko"
-*/
-
 
 export default Home ;
 
@@ -133,11 +125,15 @@ const DetailsChild = styled.div`
   transition-delay: ${props => props.open ? ".3s" : "0s"} ;
   opacity: ${props => props.open ? "1" : "0"};
   background-color: #181818 ;
-  height: ${props => props.open ? "200vh" : "0px"};
-  width: 900px;
+  // height auto no animation
+  height: ${props => props.open ? "fit-content" : "0px"};
+  max-width: 900px;
+  width: 80vw;
   margin-top: 10px;
 
-
+  @media (max-width: 600px) {
+    width: 100vw ;
+  }
 `
 
 const DetailsHeader = styled.div`
@@ -155,7 +151,6 @@ const DetailsHeader = styled.div`
   }
 
 `
-
 const YoutubeContainer = styled.div`
   width: 100% ;
   position: relative ;
@@ -176,22 +171,3 @@ const YoutubeContainer = styled.div`
     background-image: linear-gradient(to bottom,transparent -10px , #181818 );
   }
 `
-
-
-/*
-
-first_air_date: "2021-09-17"
-genre_ids: (3) [10759, 9648, 18]
-id: 93405
-media_type: "tv"
-origin_country: ['KR']
-original_language: "ko"
-original_name: "오징어 게임"
-overview: "Hundreds of cash-strapped players accept a strange invitation to compete in children's games—with high stakes. But, a tempting prize awaits the victor."
-popularity: 5200.044
-poster_path: "/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg"
-vote_average: 7.8
-vote_count: 7842
-
-
-*/
