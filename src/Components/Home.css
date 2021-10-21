@@ -65,3 +65,56 @@
 .details-description > span > strong {
   color: white ;
 }
+
+.similar-movies {
+  padding: 20px 40px ;
+}
+.similar-movies > h1 {
+  margin: 10px 0 ;
+}
+.similar-movies-container {
+  display: grid ;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(7, 300px);
+  grid-gap: 20px;
+}
+.similar-movies-container > div > img {
+  width: 100% ;
+  object-fit: contain ;
+  transition: .3s ease-out ;
+}
+.similar-movies-container > div > img:hover{
+  transform: scale(1.1);
+}
+.similar-movies-container > div {
+  border-radius: 10px ;
+  background-color: #2F2F2F ;
+  display: flex ;
+  flex-direction: column;
+  overflow: hidden;
+}
+.similar-movies-description {
+  padding: 10px 5px;
+  padding-top: 20px;
+  position: relative;
+}
+.similar-movies-description h1 {
+  font-size: 1rem;
+}
+.similar-movies-description > p {
+  font-size: 14px;
+  font-weight: lighter;
+}
+.similar-movies-description > div > span {
+  display: flex;
+  align-items: center;
+}
+.similar-movies-description > div > span > svg {
+  margin-left: 2px;
+  color: #D66345 ;
+}
+@media screen and (max-width: 700px) {
+  .similar-movies-container {
+    grid-template-columns: repeat(2 , 1fr);
+  }
+}

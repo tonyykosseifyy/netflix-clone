@@ -1,0 +1,1 @@
+GET https://api.themoviedb.org/3/movie/438631/similar?api_key=d3db47f451e0a89699b83c9dd2944439&language=en-US&page=1

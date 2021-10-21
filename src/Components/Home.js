@@ -1,4 +1,4 @@
-import React, { useState } from 'react' ;
+import React, { useState , useEffect } from 'react' ;
 import Navbar from './Navbar' ;
 import './Home.css' ;
 import { useLocation } from "react-router-dom";
@@ -12,6 +12,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import { base_url } from "../requests" ;
 import StarIcon from "@material-ui/icons/Star" ;
+import axios from "../axios" ;
+import { API_KEY } from "../requests";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -23,8 +25,9 @@ const opts = {
     autoplay: 1,
   }
 }
+const truncate = (str, n) => str?.length > n ? str.substr(0, n - 1) + "..." : str
 
-
+///movie/asdasda/similar?api_key=API_KEY&language=en-US&page=1 ;
 
 const Home = () => {
   const pathname = useLocation() ;
@@ -32,8 +35,23 @@ const Home = () => {
   const [trailerUrl, setTrailerUrl] = useState("");
   const [ open , setOpen ] = useState(false) ;
   const [ movie , setMovie ] = useState({}) ;
-  
-  console.log("home Movie=>" , movie);
+  const [ similarMovies , setSimilarMovies ] = useState([]) ;
+
+  console.log("similar Movies=>" , similarMovies);
+  const fetchSimilarMovies = async () => {
+    try {
+      const response = await axios.get(`/movie/${movie.id}/similar?api_key=${API_KEY}&language=en-US&page=1`);
+      setSimilarMovies(response.data.results);
+    } catch(err) {
+      console.log(err);
+      setSimilarMovies([]);
+    }
+  }
+  useEffect(() => {
+    if ( movie.id ) {
+      fetchSimilarMovies() ;
+    }
+  },[ movie ])
   const handleClick = (movie) => {
       setMovie(movie);
       setOpen(true);
@@ -47,6 +65,7 @@ const Home = () => {
     setMovie({});
     setOpen(false);
     setTrailerUrl("");
+    setSimilarMovies([]);
   }
   return (
     <div className='home'>
@@ -85,9 +104,23 @@ const Home = () => {
               {movie?.first_air_date && <span>first air date: <strong>{movie?.first_air_date}</strong></span>}
           </div>
         }
+          { similarMovies.length > 0 && 
           <div className='similar-movies'>
             <h1>Similar Movies</h1>
-          </div>
+            <div className="similar-movies-container">
+              {similarMovies.map((movie , index) => (
+                <div key={movie?.id || index}>
+                  <img src={`${base_url}${movie?.backdrop_path}`} alt={movie?.name} />
+                  <div className="similar-movies-description">
+                    <div style={{display:"flex",justifyContent:"space-between"}}>
+                      <h1>{movie?.title || movie?.original_name}</h1>
+                      <span>{movie?.vote_average}<StarIcon /></span>
+                    </div>
+                    <p>{truncate(movie?.overview , 100)}</p>
+                  </div>
+                </div>))}
+            </div>
+          </div>}
         </DetailsChild>
       </DetailsContainer>
 
