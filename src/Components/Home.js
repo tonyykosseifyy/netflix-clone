@@ -77,7 +77,7 @@ const Home = () => {
       </RowsContainer>
 
       <DetailsContainer open={open} >
-        <DetailsChild open={open} >
+        <DetailsChild open={open} className='details-child'>
           <DetailsHeader>
             <IconButton sx={{color:"white"}} >
               <CloseIcon size="medium" onClick={() => handleClose()} />
@@ -152,7 +152,6 @@ const DetailsContainer = styled.div`
   display: grid ;
   place-items: center;
   transition-delay: ${props => props.open ? "0s" : ".3s"};
-  overflow-y: scroll ;
 `
 
 const DetailsChild = styled.div`
@@ -162,10 +161,11 @@ const DetailsChild = styled.div`
   opacity: ${props => props.open ? "1" : "0"};
   background-color: #181818 ;
   // height auto no animation
-  height: ${props => props.open ? "fit-content" : "0px"};
+  height: ${props => props.open ? "100vh" : "0px"};
   max-width: 900px;
   width: 80vw;
   margin-top: 10px;
+  overflow-y: scroll ;
 
   @media (max-width: 600px) {
     width: 100vw ;

@@ -118,3 +118,26 @@
     grid-template-columns: repeat(2 , 1fr);
   }
 }
+
+
+
+.details-child::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.details-child::-webkit-scrollbar-thumb {
+  cursor: pointer ;
+  border-radius: 4px;
+  transition: .2s ease-out;
+  background: #7B7B7B;
+  border: 1px solid #424242 ;
+}
+.details-child::-webkit-scrollbar-thumb:hover {
+  background: #808080;
+}
+.details-child::-webkit-scrollbar-track {
+  background: #424242;
+  border-radius: 0px;
+  box-shadow: 1px 1px 4px #181818;
+  
+}
