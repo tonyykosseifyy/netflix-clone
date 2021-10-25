@@ -1,5 +1,8 @@
 ##https://api.themoviedb.org/3/movie/550?api_key=d3db47f451e0a89699b83c9dd2944439
 ##
 
+## get genres https://api.themoviedb.org/3/genre/tv/list?api_key=d3db47f451e0a89699b83c9dd2944439&language=en-US
 
-GET https://api.themoviedb.org/3/search/movie?api_key=d3db47f451e0a89699b83c9dd2944439&language=en-US&query=movienmae&page=1&include_adult=false
+GET https://api.themoviedb.org/3/trending/movie/week?api_key=d3db47f451e0a89699b83c9dd2944439
+
+##https://api.themoviedb.org/3/search/movie?api_key=d3db47f451e0a89699b83c9dd2944439&language=en-US&query=movienmae&page=1&include_adult=false
