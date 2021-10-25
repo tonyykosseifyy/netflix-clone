@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import { useLocation } from "react-router-dom";
 import axios from "../axios" ;
 import { API_KEY , base_url } from "../requests";
-import { CompareArrowsOutlined } from "@material-ui/icons";
+
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
