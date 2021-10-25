@@ -12,7 +12,7 @@ const array = ["my-list" , "movies" , "recently-added" , "tv-shows"];
 
 const requests = {
     fetchTvShows: `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`, 
-    
+
 }
 
 const SearchResults = () => {
@@ -49,6 +49,7 @@ const SearchResults = () => {
                         key={movie.id || index } 
                         src={`${base_url}${movie.backdrop_path ? movie.backdrop_path:movie.poster_path}`} 
                         alt={movie.name} 
+                        style={{display : !movie.backdrop_path && !movie.poster_path && "none"}}
                     />
                 )) 
                 : 
@@ -70,9 +71,10 @@ const SearchContainer = styled.section`
     margin-top: 30px;
     padding: 30px 20px;
     display: grid ;
-    grid-template-columns: repeat(4 , 1fr);
+    grid-template-columns: repeat(4 , 1fr );
+    grid-template-rows: repeat(3 , minmax(60px , 100px));
     grid-column-gap: 5px ;
-    grid-row-gap: 80px ;
+    grid-row-gap: 70px ;
     width: 100% ;
     max-width: 1300px ;
     @media (max-width: 800px) {
