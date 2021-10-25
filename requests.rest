@@ -1,3 +1,5 @@
 ##https://api.themoviedb.org/3/movie/550?api_key=d3db47f451e0a89699b83c9dd2944439
+##
 
-GET https://api.themoviedb.org/3/
+
+GET https://api.themoviedb.org/3/search/movie?api_key=d3db47f451e0a89699b83c9dd2944439&language=en-US&query=movienmae&page=1&include_adult=false

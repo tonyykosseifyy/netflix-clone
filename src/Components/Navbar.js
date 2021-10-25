@@ -1,8 +1,8 @@
-import { useState , useRef } from "react";
+import { useState , createRef , useEffect } from "react";
 import "./Navbar.css";
 import styled from "styled-components";
 import { NetflixLogo, NetflixButton } from "./components.js";
-import { useLocation , Link } from "react-router-dom";
+import { useLocation , Link , useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux' ;
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
@@ -17,18 +17,39 @@ function useQuery() {
 
 const checkIfActive = (query , value ) => query.get("search") === value ? "active" : "" ;
 
-const Navbar = ({ home }) => {
+const Navbar = ({ home , inSearch , searchValue }) => {
   let query = useQuery() ;
   let location = useLocation();
+  let history = useHistory() ;
   const signedIn = useSelector(state => state.user.signedIn)
   const photoURL = useSelector(state => state.user.photoURL);
   const [ open , setOpen ] = useState(false) ;
   const [ scroll , setScroll ] = useState(false) ;
-  const [ search , setSearch ] = useState("") ;
-  const [ openSearch , setOpenSearch ] = useState(false) ;
-  const searchRef = useRef(null);
+  const [ search , setSearch ] = useState(searchValue ? searchValue : "") ;
+  const [ openSearch , setOpenSearch ] = useState(inSearch ? true : false) ;
+  const searchRef = createRef(null);
   window.addEventListener("scroll" , () => setScroll(window.scrollY)) ;
-
+  useEffect(() => {
+    if (searchValue && signedIn ) {
+      const array = ["my-list" , "movies" , "recently-added" , "tv-shows"];
+        if ( array.some(( item ) => item === searchValue )) {
+          setSearch("") ;
+          setOpenSearch(false) ;
+        } else {
+          setSearch(searchValue) ;
+          setOpenSearch(true)
+          searchRef.current.focus();
+        }
+    }
+  }, [ searchValue ])
+  const handleSearch = (e) => {
+    setSearch(e.target.value) ;
+    if ( location.pathname === "/" ) {
+      history.push(`/browse?search=${e.target.value}`) ;
+    } else {
+      history.push(`/browse?search=${e.target.value}`) ;
+    }
+  }
   return (
     <NavContainer className="navbar" home={home} scroll={scroll} >
       <Link to="/" className='no-styling-link' >
@@ -72,13 +93,18 @@ const Navbar = ({ home }) => {
       { signedIn &&
         <RightNavbar>
           <SearchContainer open={openSearch} > 
-          <SearchIcon onClick={() => setOpenSearch(!openSearch)} />
+          <SearchIcon 
+            onClick={() => {
+              setOpenSearch(!openSearch) ;
+              searchRef.current.focus()
+            }} 
+          />
             <input 
             ref={searchRef}
             type="text" 
             placeholder="Search movies..." 
             value={search}
-            onChange={(e) => setSearch(e.target.value)} 
+            onChange={(e) => handleSearch(e)} 
             onBlur={() => setOpenSearch(false)}
             />
             

@@ -9,6 +9,7 @@ import { firebase } from './firebaseAuth.js' ;
 import { signUp } from './redux/userAuth' ;
 import { useDispatch , useSelector } from 'react-redux' ;
 import Home from './Components/Home' ;
+import SearchResults from './Components/SearchResults' ;
 //100 , 300 , 400 , 500 , 700 ;
 
 const App = () => {
@@ -38,7 +39,13 @@ const App = () => {
           <Login />
         </Route>
 
+        {userData.hasOwnProperty("displayName") &&
+          <Route path="/browse">
+            <SearchResults />
+          </Route>
+        }
         <Route path="/">
+        
         { !userData.hasOwnProperty("displayName") ?
             <>
               <div className="main-page">
