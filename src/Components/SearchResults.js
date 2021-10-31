@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import { useLocation } from "react-router-dom";
 import axios from "../axios" ;
 import { API_KEY , base_url } from "../requests";
-import { truncate , DetailsContainer , DetailsChild ,YoutubeContainer , DetailsHeader , opts } from "./Home" ;
+import { DetailsContainer , DetailsChild ,YoutubeContainer , DetailsHeader , opts } from "./Home" ;
 import YouTube from 'react-youtube';
 import movieTrailer from 'movie-trailer';
 import CloseIcon from "@material-ui/icons/Close";
@@ -17,8 +17,8 @@ const useQuery = () => new URLSearchParams(useLocation().search);
 const array = ["my-list" , "movies" , "recently-added" , "tv-shows"];
 
 const requests = {
-    fetchTvShows: `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`, 
-    fetchTrending : `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`,
+    fetchTvShows: `/genre/tv/list?api_key=${API_KEY}&language=en-US`, 
+    fetchTrending : `/trending/movie/week?api_key=${API_KEY}`,
     fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`
 };
 
@@ -44,16 +44,20 @@ const SearchResults = () => {
             setSearchResults([]) ;
         }
     }
-    const fetchMovies = async( url ) => {
+    const fetchMovies = async ( url ) => {
         try {
             const response = await axios.get(url)
             setSearchResults(response.data.results) ;
             console.log(response);
-        } catch(err) {setSearchResults([])}
+        } catch(err) {
+            setSearchResults([])
+            console.log(err);
+        }
     }
     useEffect(() => {
         if ( array.some(( item ) => item === search )) {
             search === "tv-shows" ? fetchMovies(requests.fetchTvShows):search === "recently-added"? fetchMovies(requests.fetchTrending) : search === "movies" && fetchMovies(requests.fetchTopRated) ;
+            console.log("first")
         } else SearchMovie() ;
     }, [ search ])
 
@@ -71,7 +75,8 @@ const SearchResults = () => {
         setOpen(false);
         setTrailerUrl("");
       }
-    console.log(searchResults) ;
+    console.log(movie) ;
+    console.log("true state=> " , (movie?.title) && "true" )
     return (
         <SearchWrapper className='home'>
             <Navbar home inSearch searchValue={search} handleInputSearch={setSearch} />
@@ -106,12 +111,13 @@ const SearchResults = () => {
                 
                 { movie && 
                 <div className='details-description'>
+                    { (movie?.title || movie?.original_title) ? 
                     <div className='description-header'>
-                        <h1><span>About </span>{movie?.name || movie?.original_name }</h1>
+                        <h1><span>About </span>{movie?.title || movie?.original_title }</h1>
                         <span>{movie?.vote_average}<StarIcon /></span>
-                    </div>
+                    </div> : null }
                     <p>{movie?.overview}</p>
-                    {movie?.original_name && <span>original name: <strong>{movie?.original_name}</strong></span>}
+                    {movie?.original_title && <span>original title: <strong>{movie?.original_title}</strong></span>}
                     {movie?.origin_country && <span>original country: <strong>{movie?.origin_country?.length > 0 ? movie?.origin_country[0] : movie?.origin_country }</strong></span>}
                     {movie?.original_language && <span>original language: <strong>{movie?.original_language}</strong></span>}
                     {movie?.media_type && <span>media type: <strong>{movie?.media_type}</strong></span>}

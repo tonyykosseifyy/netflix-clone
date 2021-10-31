@@ -67,6 +67,8 @@ const Home = () => {
     setTrailerUrl("");
     setSimilarMovies([]);
   }
+  console.log(movie);
+  console.log("true state=> " , (movie.title || movie.original_title))
   return (
     <div className='home'>
       <Navbar home={true} />
@@ -92,10 +94,11 @@ const Home = () => {
           
           { movie && 
           <div className='details-description'>
-              <div className='description-header'>
-                <h1><span>About </span>{movie?.name || movie?.original_name }</h1>
-                <span>{movie?.vote_average}<StarIcon /></span>
-              </div>
+              { (movie.name || movie.original_name) ? 
+                    <div className='description-header'>
+                        <h1><span>About </span>{movie?.name || movie?.original_name }</h1>
+                        <span>{movie?.vote_average}<StarIcon /></span>
+                    </div> : null }
               <p>{movie?.overview}</p>
               {movie?.original_name && <span>original name: <strong>{movie?.original_name}</strong></span>}
               {movie?.origin_country && <span>original country: <strong>{movie?.origin_country?.length > 0 ? movie?.origin_country[0] : movie?.origin_country }</strong></span>}

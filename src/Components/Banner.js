@@ -22,7 +22,6 @@ const Banner = ({ url }) => {
     useEffect(() => {
         fetchOriginals();
     }, [])
-    console.log(movie) ;
     return (
         <BannerWrapper url={`${base_url}${movie?.backdrop_path}`}>
             <BannerTitle>{movie?.title || movie?.name}</BannerTitle>
