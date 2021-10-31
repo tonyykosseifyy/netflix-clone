@@ -27,6 +27,7 @@ const Navbar = ({ home , inSearch , searchValue }) => {
   const [ scroll , setScroll ] = useState(false) ;
   const [ search , setSearch ] = useState(searchValue ? searchValue : "") ;
   const [ openSearch , setOpenSearch ] = useState(inSearch ? true : false) ;
+  const [ accountNavbar , setAccountNavbar ] = useState(false) ;
   const searchRef = createRef(null);
   window.addEventListener("scroll" , () => setScroll(window.scrollY)) ;
   useEffect(() => {
@@ -110,7 +111,7 @@ const Navbar = ({ home , inSearch , searchValue }) => {
             
           </SearchContainer>
 
-          <AccountNavbar>
+          <AccountNavbar active={accountNavbar} onClick={() => setAccountNavbar(!accountNavbar)}>
             <img src={photoURL ? photoURL : netflixFavicon } alt="User Image" />
             <ArrowDropDownIcon />
             <div>
@@ -204,9 +205,7 @@ const AccountNavbar = styled.div`
   cursor: pointer;
   & > svg {
     transition: .3s ease-out;
-  }
-  &:hover > svg {
-    transform: rotate(180deg);
+    transform: ${props => props.active && "rotate(180deg)"};
   }
   & > img {
     width: 1.9em ;
@@ -223,13 +222,14 @@ const AccountNavbar = styled.div`
     font-size: 14px;
     left: -50px;
     padding: 10px 5px;
-    transform: scaleY(0) ;
+    transform: ${props => props.active ? "scaleY(1)": "scaleY(0)"} ;
     transform-origin: top;
     transition: transform .2s ease-out;
     overflow: hidden;
     display: flex ;
     flex-direction: column ;
     transition-delay: .3s ;
+    border: ${props => props.active ? "1px solid #444445 " : ""}; 
   }
   & > div > a {
     color: white;
@@ -248,9 +248,5 @@ const AccountNavbar = styled.div`
     font-size: 1.8rem;
     left: 50%;
     transform: translateX(-50%);
-  }
-  &:hover > div {
-    border: 1px solid #444445;
-    transform: scaleY(1);
   }
 `

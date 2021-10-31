@@ -4,7 +4,12 @@ import Navbar from "./Navbar";
 import { useLocation } from "react-router-dom";
 import axios from "../axios" ;
 import { API_KEY , base_url } from "../requests";
-
+import { truncate , DetailsContainer , DetailsChild ,YoutubeContainer , DetailsHeader , opts } from "./Home" ;
+import YouTube from 'react-youtube';
+import movieTrailer from 'movie-trailer';
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+import StarIcon from "@material-ui/icons/Star" ;
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -22,7 +27,9 @@ const SearchResults = () => {
     let location = useLocation() ;
     const [ search , setSearch ] = useState("") ;
     const [ searchResults , setSearchResults ] = useState([]) ;
-    
+    const [ open , setOpen ] = useState(false) ;
+    const [trailerUrl, setTrailerUrl] = useState("");
+    const [ movie , setMovie ] = useState({}) ;
     useEffect(() => {
         setSearch(query.get("search"));
     }, [ location.search ])
@@ -33,6 +40,7 @@ const SearchResults = () => {
             const response = await axios.get(`/search/movie?api_key=${API_KEY}&language=en-US&query=${search}&page=1`)
             setSearchResults(response.data.results) ; 
         } catch(err) {
+            console.log(err);
             setSearchResults([]) ;
         }
     }
@@ -48,6 +56,21 @@ const SearchResults = () => {
             search === "tv-shows" ? fetchMovies(requests.fetchTvShows):search === "recently-added"? fetchMovies(requests.fetchTrending) : search === "movies" && fetchMovies(requests.fetchTopRated) ;
         } else SearchMovie() ;
     }, [ search ])
+
+    const handleClick = (movie) => {
+        setMovie(movie);
+        setOpen(true);
+        movieTrailer(movie?.title || "")
+          .then(url => {
+            const urlParams = new URLSearchParams(new URL(url).search);
+            setTrailerUrl(urlParams.get('v'));
+          }).catch((error) => console.log(error));
+    }
+    const handleClose = () => {
+        setMovie({});
+        setOpen(false);
+        setTrailerUrl("");
+      }
     console.log(searchResults) ;
     return (
         <SearchWrapper className='home'>
@@ -60,11 +83,43 @@ const SearchResults = () => {
                         src={`${base_url}${movie.backdrop_path}`} 
                         alt={movie.name} 
                         style={{display : !movie.backdrop_path && "none"}}
+                        onClick={() => handleClick(movie)}
                     />
                 )) 
                 : 
                 <p style={{fontWeight:"300"}}>No Results Found for <strong>{search.replace("-"," ")}</strong></p>}
             </SearchContainer>
+
+            <DetailsContainer open={open} >
+                <DetailsChild open={open} className='details-child'>
+                <DetailsHeader>
+                    <IconButton sx={{color:"white"}} >
+                    <CloseIcon size="medium" onClick={() => handleClose()} />
+                    </IconButton>
+                </DetailsHeader>
+                <YoutubeContainer>
+                    {trailerUrl ? 
+                        <YouTube videoId={trailerUrl} opts={opts} /> : 
+                        <img src={`${base_url}${movie.backdrop_path}`} alt={movie?.name} /> 
+                    }
+                </YoutubeContainer>
+                
+                { movie && 
+                <div className='details-description'>
+                    <div className='description-header'>
+                        <h1><span>About </span>{movie?.name || movie?.original_name }</h1>
+                        <span>{movie?.vote_average}<StarIcon /></span>
+                    </div>
+                    <p>{movie?.overview}</p>
+                    {movie?.original_name && <span>original name: <strong>{movie?.original_name}</strong></span>}
+                    {movie?.origin_country && <span>original country: <strong>{movie?.origin_country?.length > 0 ? movie?.origin_country[0] : movie?.origin_country }</strong></span>}
+                    {movie?.original_language && <span>original language: <strong>{movie?.original_language}</strong></span>}
+                    {movie?.media_type && <span>media type: <strong>{movie?.media_type}</strong></span>}
+                    {movie?.first_air_date && <span>first air date: <strong>{movie?.first_air_date}</strong></span>}
+                </div>
+                }
+                </DetailsChild>
+            </DetailsContainer>
         </SearchWrapper>
     );
 };

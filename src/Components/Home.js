@@ -18,14 +18,14 @@ import { API_KEY } from "../requests";
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
-const opts = {
+export const opts = {
   height: "400",
   width: "100%",
   playerVars: {
     autoplay: 1,
   }
 }
-const truncate = (str, n) => str?.length > n ? str.substr(0, n - 1) + "..." : str
+export const truncate = (str, n) => str?.length > n ? str.substr(0, n - 1) + "..." : str
 
 ///movie/asdasda/similar?api_key=API_KEY&language=en-US&page=1 ;
 
@@ -140,7 +140,7 @@ const RowsContainer = styled.section`
   z-index: 100 ;
 `
 
-const DetailsContainer = styled.div`
+export const DetailsContainer = styled.div`
   z-index: 999999999 ;
   position: fixed ;
   top: 0 ;
@@ -154,7 +154,7 @@ const DetailsContainer = styled.div`
   transition-delay: ${props => props.open ? "0s" : ".3s"};
 `
 
-const DetailsChild = styled.div`
+export const DetailsChild = styled.div`
   border-radius: 10px;
   transition: .3s ease-out ;
   transition-delay: ${props => props.open ? ".3s" : "0s"} ;
@@ -172,7 +172,7 @@ const DetailsChild = styled.div`
   }
 `
 
-const DetailsHeader = styled.div`
+export const DetailsHeader = styled.div`
   position: relative ;
   padding-top: 55px;
 
@@ -187,7 +187,7 @@ const DetailsHeader = styled.div`
   }
 
 `
-const YoutubeContainer = styled.div`
+export const YoutubeContainer = styled.div`
   width: 100% ;
   position: relative ;
   & > img {
