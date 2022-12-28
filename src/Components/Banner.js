@@ -9,6 +9,11 @@ import AddIcon from '@material-ui/icons/Add';
 
 const truncate = (str, n) => str?.length > n ? str.substr(0, n - 1) + "..." : str
 
+const link = "https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg";
+//`${base_url}${movie?.backdrop_path}`
+//{movie?.title || movie?.name}
+//{truncate(movie?.overview, 320)}
+
 const Banner = ({ url }) => {
     const [ movie , setMovie ] = useState() ; 
     const fetchOriginals = async () => {
@@ -23,9 +28,9 @@ const Banner = ({ url }) => {
         fetchOriginals();
     }, [])
     return (
-        <BannerWrapper url={`${base_url}${movie?.backdrop_path}`}>
-            <BannerTitle>{movie?.title || movie?.name}</BannerTitle>
-            <BannerDescription>{truncate(movie?.overview, 320)}</BannerDescription>
+        <BannerWrapper url={link}>
+            <BannerTitle>Black Adam</BannerTitle>
+            <BannerDescription>Black Adam wields superpowers bestowed upon him by magic, including flight, superhuman strength, invulnerability, enhanced speed and the ability to shoot lightning. His powers are triggered by saying the magic word “Shazam,” much like the superhero Shazam, his modern-day successor and rival.</BannerDescription>
             <FlexContainer>
                 <PlayButton><PlayArrowIcon size="small" />Watch</PlayButton>
                 <AddButton><AddIcon />Add List</AddButton>

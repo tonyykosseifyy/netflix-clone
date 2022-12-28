@@ -80,9 +80,9 @@ const SearchResults = () => {
     return (
         <SearchWrapper className='home'>
             <Navbar home inSearch searchValue={search} handleInputSearch={setSearch} />
-            { searchResults.length > 0 && <SearchHeader>Results For " <strong>{search.replace("-"," ")}</strong> "</SearchHeader>}
+            { searchResults?.length > 0 && <SearchHeader>Results For " <strong>{search.replace("-"," ")}</strong> "</SearchHeader>}
             <SearchContainer>
-                { searchResults.length > 0 ? searchResults.map((movie , index) => (
+                { searchResults?.length > 0 ? searchResults.map((movie , index) => (
                     <img 
                         key={movie.id || index } 
                         src={`${base_url}${movie.backdrop_path}`} 

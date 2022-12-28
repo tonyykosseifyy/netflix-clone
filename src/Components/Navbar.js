@@ -85,10 +85,8 @@ const Navbar = ({ home , inSearch , searchValue }) => {
           >
         <div className='arrow-carrout'></div>
         <Link onClick={() => setOpen(false)} className={checkIfActive(query,null)} to="/">Home</Link>
-        <Link onClick={() => setOpen(false)} className={checkIfActive(query,"tv-shows")} to="/browse?search=tv-shows">TV Shows</Link>
         <Link onClick={() => setOpen(false)} className={checkIfActive(query,"movies")} to="/browse?search=movies">Movies</Link>
         <Link onClick={() => setOpen(false)} className={checkIfActive(query,"recently-added")} to="/browse?search=recently-added">Recently Added</Link>
-        <Link onClick={() => setOpen(false)} className={checkIfActive(query,"my-list")} to="/browse?search=my-list">My List</Link>
       </div>
 
       { signedIn &&
